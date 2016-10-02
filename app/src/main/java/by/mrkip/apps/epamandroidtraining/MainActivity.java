@@ -72,6 +72,19 @@ private TextView tv;
     }
 
 
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        tv.setX(savedInstanceState.getFloat("tv_X"));
+        tv.setY(savedInstanceState.getFloat("tv_Y"));
+    }
+
+
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putFloat("tv_X", tv.getY());
+        outState.putFloat("tv_Y", tv.getX());
+    }
+
     protected class mDragManager  implements View.OnDragListener {
 
 
