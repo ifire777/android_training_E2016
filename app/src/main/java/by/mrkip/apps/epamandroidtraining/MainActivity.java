@@ -13,7 +13,10 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import by.mrkip.apps.epamandroidtraining.util.SharedPrefManager;
+
 public class MainActivity extends AppCompatActivity implements View.OnTouchListener{
+    public static final String STATUS = "status";
 
     private String msg="MyAppLogTag";
 private TextView tv;
@@ -23,6 +26,10 @@ private TextView tv;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        String i= new SharedPrefManager("appStoreg",this).getStringParam(STATUS);
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         cl=(RelativeLayout) findViewById(R.id.content_main);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);

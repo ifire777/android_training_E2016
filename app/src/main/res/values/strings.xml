@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">Epam Android Training</string>
     <string name="action_settings">Settings</string>
+    <string name="get_data_error">"Error while try to get from sharedPreference: "</string>
+    <string name="save_data_error">"Error while try to save in sharedPreference : "</string>
+    <string name="tv_question">1+1=</string>
+    <string name="q1">1+1=</string>
+    <string name="bt_next">NEXT</string>
+    <string name="q2">5-2=</string>
+    <string name="q3">12/4=</string>
 </resources>
