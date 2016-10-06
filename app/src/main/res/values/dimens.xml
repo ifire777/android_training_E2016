@@ -3,4 +3,19 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="default_icon_size">52dp</dimen>
+    <dimen name="default_side_mrg">12dp</dimen>
+    <dimen name="default_side_mrg_micr">4dp</dimen>
+    <dimen name="default_side_mrg_mini">12dp</dimen>
+    <dimen name="default_second_row">66dp</dimen>
+    <dimen name="fb_msg_textsize">15sp</dimen>
+    <dimen name="fb_p_left">40dp</dimen>
+    <dimen name="in_p_left">44dp</dimen>
+    <dimen name="fb_msg2">17sp</dimen>
+    <dimen name="in_ico_size">24dp</dimen>
+    <dimen name="in_bar_wight">42dp</dimen>
+    <dimen name="fb_msg4">20sp</dimen>
+    <dimen name="fb_msg">14sp</dimen>
+
+
 </resources>

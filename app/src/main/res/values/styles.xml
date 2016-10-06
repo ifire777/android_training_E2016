@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -13,8 +13,26 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="InButton" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/in_btn_border_cast</item>
+        <item name="android:textAppearance">@style/TextAppearance.InBtnText</item>
+
+    </style>
+
+    <style name="InButtonBlue" parent="InButton">
+        <item name="android:background">@color/in_color_primary</item>
+        <item name="android:textAppearance">@style/TextAppearance.InButtonBlueText</item>
+    </style>
+
+    <style name="TextAppearance.InBtnText" parent="TextAppearance.AppCompat.Button">
+        <item name="textAllCaps">false</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:textColor">@color/in_color_primary</item>
+    </style>
+    <style name="TextAppearance.InButtonBlueText" parent="TextAppearance.InBtnText">
+       <item name="android:textColor">@color/in_bg_white</item>
+    </style>
 
 </resources>

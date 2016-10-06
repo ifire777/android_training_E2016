@@ -8,4 +8,18 @@
     <string name="bt_next">NEXT</string>
     <string name="q2">5-2=</string>
     <string name="q3">12/4=</string>
+    <string name="post_to_facebook">Post to Facebook</string>
+    <string name="post">POST</string>
+    <string name="fb1_text1">Josephine Williams is =) feeling happy with Joey Ramos and 5 others.</string>
+    <string name="jw_message">Had a great moment this morning with some close friends</string>
+    <string name="fb_add_post">Add to your post</string>
+    <string name="in_about">Директор (управление проектами) в\n GoldenPhase Solar\n МГУ-Москва</string>
+    <string name="in_about_com">Новосибирск \u25CF 500+ \u0009\u0009\u0009 </string>
+    <string name="in_nick1">Мария Соловьёва</string>
+    <string name="in_send_mess">Отправить сообщение</string>
+    <string name="in_set_cont">Устанивить контакт</string>
+    <string name="in_about_prof">Менеджер высшего звена в сфере\n возобновляемых источников энергии с 10 ...</string>
+    <string name="in_friens_info">Основные сведения</string>
+    <string name="in_cont_num_title">1 общий контакт</string>
+    <string name="in_about_same_cont">У вас с Марией общий контакт - Наталия Ивановна</string>
 </resources>

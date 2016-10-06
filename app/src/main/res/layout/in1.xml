@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/in_fon"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/in_bar_wight"
+            android:background="@color/in_color_primary">
+
+            <TextView
+                android:id="@+id/in_tv_find"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="@dimen/default_side_mrg"
+                android:layout_marginLeft="@dimen/default_icon_size"
+                android:text="@string/in_nick1"
+                android:textColor="@android:color/white" />
+
+            <ImageView
+                android:layout_width="@dimen/in_ico_size"
+                android:layout_height="@dimen/in_ico_size"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="@dimen/default_side_mrg"
+                android:layout_marginLeft="18dp"
+                android:left="@+id/in_tv_find"
+                app:srcCompat="@drawable/ic_search_black_24dp" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/default_side_mrg"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="18dp"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/ic_line_24dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_btn"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/in_bar_wight"
+            android:background="@color/in_color_primary"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/in_ic_pers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="@dimen/in_p_left"
+                android:layout_toRightOf="@+id/in_ic_home"
+                app:srcCompat="@drawable/ic_people_outline_white_24dp" />
+
+            <ImageView
+                android:id="@+id/in_ic_dialog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="@dimen/in_p_left"
+                android:layout_toRightOf="@+id/in_ic_pers"
+                app:srcCompat="@drawable/ic_chat_bubble_outline_24dp" />
+
+            <ImageView
+                android:id="@+id/in_ic_notif"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="@dimen/in_p_left"
+                android:layout_toRightOf="@+id/in_ic_dialog"
+                app:srcCompat="@drawable/ic_notifications_none_white_24dp" />
+
+            <ImageView
+                android:id="@+id/in_ic_acc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="@dimen/in_p_left"
+                android:layout_toRightOf="@+id/in_ic_notif"
+                app:srcCompat="@drawable/ic_account_circle_24dp" />
+
+            <ImageView
+                android:id="@+id/in_ic_home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignTop="@+id/in_ic_pers"
+                android:layout_marginLeft="45dp"
+                android:layout_marginStart="45dp"
+                app:srcCompat="@drawable/ic_home_24dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="@dimen/default_side_mrg"
+            android:layout_marginRight="@dimen/default_side_mrg"
+            android:layout_weight="0.81">
+
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="290dp"
+                android:layout_alignParentBottom="true"
+                android:background="@color/in_bg_white" />
+
+            <TextView
+                android:id="@+id/tv_nick"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/in_avat_pers"
+                android:layout_centerHorizontal="true"
+                android:text="@string/in_nick1"
+                android:textSize="@dimen/fb_msg4"
+                android:textStyle="bold"
+                android:typeface="monospace" />
+
+
+            <TextView
+                android:id="@+id/tv_about"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_nick"
+                android:layout_centerHorizontal="true"
+                android:gravity="center_horizontal"
+                android:maxLines="4"
+                android:text="@string/in_about"
+                android:textSize="@dimen/fb_msg2" />
+
+            <ImageView
+                android:id="@+id/in_avat_pers"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:scaleType="fitEnd"
+                app:srcCompat="@drawable/in_0002" />
+
+
+            <TextView
+                android:id="@+id/tv_about_com"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_about"
+                android:layout_marginLeft="@dimen/default_second_row"
+                android:gravity="center_horizontal"
+                android:text="@string/in_about_com"
+                android:textSize="@dimen/fb_msg2" />
+
+            <ImageView
+                android:id="@+id/in_community"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignRight="@id/tv_about_com"
+                android:layout_below="@id/tv_about"
+                app:srcCompat="@drawable/ic_people_outline_black_24dp" />
+
+            <ImageView
+                android:id="@+id/in_point"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignRight="@id/tv_about_com"
+                android:layout_below="@id/tv_about"
+                app:srcCompat="@drawable/ic_people_outline_black_24dp" />
+
+            <View
+                android:id="@+id/in_empty_view"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_below="@id/in_point"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="@dimen/in_p_left"
+                android:background="@color/colorAccent">
+
+            </View>
+
+            <Button
+                android:id="@+id/in_btn_send_mess"
+                style="@style/InButton"
+                android:layout_width="148dp"
+                android:layout_height="35dp"
+                android:layout_alignLeft="@id/in_empty_view"
+                android:layout_below="@id/in_point"
+                android:text="@string/in_send_mess" />
+
+            <Button
+                android:id="@+id/in_btn_set_cont"
+                style="@style/InButtonBlue"
+                android:layout_width="148dp"
+                android:layout_height="35dp"
+                android:layout_alignRight="@id/in_empty_view"
+                android:layout_below="@id/in_point"
+                android:text="@string/in_set_cont" />
+            <TextView
+                android:id="@+id/tv_about_prof"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/in_btn_set_cont"
+                android:layout_centerHorizontal="true"
+                android:gravity="center_horizontal"
+                android:paddingTop="@dimen/default_side_mrg_mini"
+                android:maxLines="2"
+                android:text="@string/in_about_prof"
+                android:textSize="@dimen/fb_msg" />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="@dimen/default_side_mrg"
+            android:layout_marginRight="@dimen/default_side_mrg"
+            android:layout_marginTop="@dimen/default_side_mrg_mini"
+            android:layout_weight="0.2"
+            android:background="@color/in_bg_white">
+
+
+            <TextView
+                android:id="@+id/tv_friends_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="@string/in_friens_info"
+                android:textSize="@dimen/fb_msg2"
+                android:textStyle="bold"
+                android:typeface="monospace" />
+
+            <ImageView
+                android:id="@+id/in_friend_avat"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:scaleType="fitEnd"
+                app:srcCompat="@drawable/in_0005" />
+
+            <TextView
+                android:id="@+id/tv_friend_about"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_friends_info"
+                android:layout_marginLeft="@dimen/default_second_row"
+                android:gravity="left|start"
+                android:text="@string/in_cont_num_title"
+                android:textSize="@dimen/fb_msg"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_friend_about_com"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_friend_about"
+                android:layout_marginLeft="@dimen/default_second_row"
+                android:gravity="left|start"
+                android:text="@string/in_about_same_cont"
+                android:textSize="@dimen/fb_msg" />
+
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+</merge>

@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.09"
+            android:background="#3b5997">
+
+            <ImageButton
+                android:layout_width="@dimen/default_icon_size"
+                android:layout_height="@dimen/default_icon_size"
+                android:layout_gravity="center_vertical"
+                android:background="?attr/selectableItemBackground"
+                app:srcCompat="@drawable/drct" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/default_icon_size"
+                android:text="@string/post_to_facebook"
+                android:textColor="@android:color/white" />
+
+            <Button
+                android:layout_width="@dimen/default_icon_size"
+                android:layout_height="@dimen/default_icon_size"
+                android:layout_gravity="center_vertical|right"
+                android:background="?attr/selectableItemBackground"
+                android:text="@string/post"
+                android:textColor="@android:color/white" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_icon_size"
+            android:layout_weight="0.09">
+
+            <ImageView
+                android:layout_width="@dimen/default_icon_size"
+                android:layout_height="@dimen/default_icon_size"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="@dimen/default_side_mrg"
+                android:background="?attr/selectableItemBackground"
+                app:srcCompat="@drawable/fb1_1" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/default_second_row"
+                android:layout_marginStart="@dimen/default_second_row"
+                android:layout_marginTop="@dimen/default_side_mrg"
+                android:text="@string/fb1_text1"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/fb_msg_textsize" />
+
+            <android.support.v7.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|bottom"
+                android:layout_marginLeft="@dimen/default_second_row"
+                android:layout_marginStart="@dimen/default_second_row"
+                app:srcCompat="@drawable/fb1_2" />
+
+        </FrameLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/default_side_mrg"
+            android:layout_weight="0.09"
+            android:text="@string/jw_message"
+            android:textSize="@dimen/fb_msg2" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.62"
+            android:gravity="start">
+
+            <ImageView
+                android:id="@+id/img_main"
+                android:layout_width="275dp"
+                android:layout_height="match_parent"
+                android:paddingLeft="@dimen/default_side_mrg_micr"
+                android:paddingStart="@dimen/default_side_mrg_micr"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/fb_0000" />
+
+            <ImageView
+                android:id="@+id/img_side1"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:layout_alignParentBottom="true"
+                android:layout_toEndOf="@+id/img_main"
+                android:layout_toRightOf="@+id/img_main"
+                android:paddingLeft="@dimen/default_side_mrg_micr"
+                android:paddingStart="@dimen/default_side_mrg_micr"
+                app:srcCompat="@drawable/fb_0003" />
+
+            <ImageView
+                android:id="@+id/img_side2"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/img_main"
+                android:layout_toRightOf="@+id/img_main"
+                android:paddingLeft="@dimen/default_side_mrg_micr"
+                android:paddingStart="@dimen/default_side_mrg_micr"
+                app:srcCompat="@drawable/fb_0002" />
+
+            <ImageView
+                android:id="@+id/img_side3"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:paddingLeft="@dimen/default_side_mrg_micr"
+                android:paddingStart="@dimen/default_side_mrg_micr"
+                app:srcCompat="@drawable/fb_0001" />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.12">
+
+            <TextView
+                android:id="@+id/tv_post"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/default_side_mrg"
+                android:gravity="center_vertical"
+                android:text="@string/fb_add_post"
+                android:textColor="@android:color/background_dark"
+                android:textSize="@dimen/fb_msg2" />
+
+            <ImageView
+                android:id="@+id/ic_btn_smile"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_toEndOf="@+id/ic_btn_link"
+                android:layout_toRightOf="@+id/ic_btn_link"
+                android:paddingEnd="@dimen/default_side_mrg"
+                android:paddingLeft="@dimen/default_side_mrg"
+                android:paddingRight="@dimen/default_side_mrg"
+                android:paddingStart="@dimen/default_side_mrg"
+                app:srcCompat="@drawable/fb_0008" />
+
+            <ImageView
+                android:id="@+id/ic_btn_img"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_toEndOf="@+id/ic_btn_location"
+                android:layout_toRightOf="@+id/ic_btn_location"
+                android:paddingEnd="@dimen/default_side_mrg"
+                android:paddingLeft="@dimen/default_side_mrg"
+                android:paddingRight="@dimen/default_side_mrg"
+                android:paddingStart="@dimen/default_side_mrg"
+                app:srcCompat="@drawable/fb_0006" />
+
+            <ImageView
+                android:id="@+id/ic_btn_link"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignTop="@+id/ic_btn_smile"
+                android:layout_toEndOf="@+id/tv_post"
+                android:layout_toRightOf="@+id/tv_post"
+                android:paddingEnd="@dimen/default_side_mrg"
+                android:paddingLeft="@dimen/fb_p_left"
+                android:paddingRight="@dimen/default_side_mrg"
+                android:paddingStart="@dimen/fb_p_left"
+                app:srcCompat="@drawable/fb_0009" />
+
+            <ImageView
+                android:id="@+id/ic_btn_location"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/ic_btn_smile"
+                android:layout_toRightOf="@+id/ic_btn_smile"
+                android:paddingEnd="@dimen/default_side_mrg"
+                android:paddingLeft="@dimen/default_side_mrg"
+                android:paddingRight="@dimen/default_side_mrg"
+                android:paddingStart="@dimen/default_side_mrg"
+                app:srcCompat="@drawable/fb_0007_9" />
+
+
+        </RelativeLayout>
+    </LinearLayout>
+</merge>

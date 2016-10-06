@@ -3,7 +3,6 @@ package by.mrkip.apps.epamandroidtraining;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.DragEvent;
 import android.view.Menu;
@@ -30,8 +29,7 @@ private TextView tv;
         String i= new SharedPrefManager("appStoreg",this).getStringParam(STATUS);
 
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        cl=(RelativeLayout) findViewById(R.id.content_main);
+       cl=(RelativeLayout) findViewById(R.id.content_main);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
          tv=(TextView) findViewById(R.id.mm_txView);
 
