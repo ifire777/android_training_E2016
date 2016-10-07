@@ -13,10 +13,10 @@ import by.mrkip.apps.epamandroidtraining.util.SharedPrefManager;
 public abstract class PageActivity extends AppCompatActivity {
 	protected SharedPrefManager sharedPrefManager;
 
-	protected   final String STATUS = "status";
-	protected   final String APP_STORAGE = "appStorage";
+	protected final String STATUS = "status";
+	protected final String APP_STORAGE = "appStorage";
 
-	protected   Integer STATUS_VALUE;
+	protected Integer STATUS_VALUE;
 
 	protected TextView tvQuestion;
 	protected EditText etAnswer;

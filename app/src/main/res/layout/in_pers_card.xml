@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="0dp"
-    android:layout_marginLeft="@dimen/default_side_mrg"
-    android:layout_marginRight="@dimen/default_side_mrg"
-    android:layout_weight="0.81">
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginLeft="@dimen/default_side_mrg"
+                android:layout_marginRight="@dimen/default_side_mrg"
+                android:layout_weight="0.81">
 
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="290dp"
         android:layout_alignParentBottom="true"
-        android:background="@color/in_bg_white" />
+        android:background="@color/in_bg_white"/>
 
     <TextView
         android:id="@+id/tv_nick"
@@ -24,7 +23,7 @@
         android:text="@string/in_nick1"
         android:textSize="@dimen/fb_msg4"
         android:textStyle="bold"
-        android:typeface="monospace" />
+        android:typeface="monospace"/>
 
 
     <TextView
@@ -36,7 +35,7 @@
         android:gravity="center_horizontal"
         android:maxLines="4"
         android:text="@string/in_about"
-        android:textSize="@dimen/fb_msg2" />
+        android:textSize="@dimen/fb_msg2"/>
 
     <ImageView
         android:id="@+id/in_avat_pers"
@@ -44,7 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:scaleType="fitEnd"
-        app:srcCompat="@drawable/in_0002" />
+        app:srcCompat="@drawable/in_0002"/>
 
 
     <TextView
@@ -55,7 +54,7 @@
         android:layout_marginLeft="@dimen/default_second_row"
         android:gravity="center_horizontal"
         android:text="@string/in_about_com"
-        android:textSize="@dimen/fb_msg2" />
+        android:textSize="@dimen/fb_msg2"/>
 
     <ImageView
         android:id="@+id/in_community"
@@ -63,7 +62,7 @@
         android:layout_height="wrap_content"
         android:layout_alignRight="@id/tv_about_com"
         android:layout_below="@id/tv_about"
-        app:srcCompat="@drawable/ic_people_outline_black_24dp" />
+        app:srcCompat="@drawable/ic_people_outline_black_24dp"/>
 
     <ImageView
         android:id="@+id/in_point"
@@ -71,7 +70,7 @@
         android:layout_height="wrap_content"
         android:layout_alignRight="@id/tv_about_com"
         android:layout_below="@id/tv_about"
-        app:srcCompat="@drawable/ic_people_outline_black_24dp" />
+        app:srcCompat="@drawable/ic_people_outline_black_24dp"/>
 
     <View
         android:id="@+id/in_empty_view"
@@ -91,7 +90,7 @@
         android:layout_height="35dp"
         android:layout_alignLeft="@id/in_empty_view"
         android:layout_below="@id/in_point"
-        android:text="@string/in_send_mess" />
+        android:text="@string/in_send_mess"/>
 
     <Button
         android:id="@+id/in_btn_set_cont"
@@ -100,7 +99,8 @@
         android:layout_height="35dp"
         android:layout_alignRight="@id/in_empty_view"
         android:layout_below="@id/in_point"
-        android:text="@string/in_set_cont" />
+        android:text="@string/in_set_cont"/>
+
     <TextView
         android:id="@+id/tv_about_prof"
         android:layout_width="wrap_content"
@@ -108,10 +108,10 @@
         android:layout_below="@id/in_btn_set_cont"
         android:layout_centerHorizontal="true"
         android:gravity="center_horizontal"
-        android:paddingTop="@dimen/default_side_mrg_mini"
         android:maxLines="2"
+        android:paddingTop="@dimen/default_side_mrg_mini"
         android:text="@string/in_about_prof"
-        android:textSize="@dimen/fb_msg" />
+        android:textSize="@dimen/fb_msg"/>
 
 
 </RelativeLayout>

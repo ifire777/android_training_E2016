@@ -10,24 +10,25 @@ import android.os.Bundle;
 
 public class Page1Activity extends PageActivity {
 
-    public final String A_1 = "a1";
-    public final int PAGE = 1;
+	public final String A_1 = "a1";
+	public final int PAGE = 1;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        pageNum= PAGE;
-    }
-    @Override
-    protected void goNextPage() {
-       // sharedPrefManager.saveParam(A_1,etAnswer.getText().toString());
-        startActivity(new Intent(this,Page2Activity.class));
-    }
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		pageNum = PAGE;
+	}
 
-    @Override
-    protected boolean init() {
-    tvQuestion.setText(getString(R.string.q1));
-    etAnswer.setText(sharedPrefManager.getStringParam(A_1,""));
-        return true;
-    }
+	@Override
+	protected void goNextPage() {
+		// sharedPrefManager.saveParam(A_1,etAnswer.getText().toString());
+		startActivity(new Intent(this, Page2Activity.class));
+	}
+
+	@Override
+	protected boolean init() {
+		tvQuestion.setText(getString(R.string.q1));
+		etAnswer.setText(sharedPrefManager.getStringParam(A_1, ""));
+		return true;
+	}
 }
