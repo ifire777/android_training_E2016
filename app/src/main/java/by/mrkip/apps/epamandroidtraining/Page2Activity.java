@@ -11,7 +11,7 @@ import android.os.Bundle;
 
 public class Page2Activity extends PageActivity {
 
-    public  final String A_2 = "a2";
+    public final String A_2 = "a2";
     public final int PAGE = 2;
 
     @Override
@@ -32,10 +32,10 @@ public class Page2Activity extends PageActivity {
         return true;
     }
 
-    @Override
+   /* @Override
     public void onBackPressed()
     {
         startActivity(new Intent(this,Page1Activity.class));
         super.onBackPressed();  // optional depending on your needs
-    }
+    }*/
 }

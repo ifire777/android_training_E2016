@@ -24,12 +24,12 @@ public class Page3Activity extends PageActivity {
         startActivity(new Intent(this,MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_TASK_ON_HOME));
     }
 
-    @Override
+    /*@Override
     public void onBackPressed()
     {
         startActivity(new Intent(this,Page2Activity.class));
-        super.onBackPressed();  // optional depending on your needs
-    }
+        super.onBackPressed();
+    }*/
 
     @Override
     protected boolean init() {
