@@ -4,9 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 
 
-/**
- * Created by kip on 04.10.2016.
- */
 
 public class Page1Activity extends PageActivity {
 

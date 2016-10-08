@@ -1,21 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:id="@+id/content_main"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingBottom="@dimen/activity_vertical_margin"
-                android:paddingLeft="@dimen/activity_horizontal_margin"
-                android:paddingRight="@dimen/activity_horizontal_margin"
-                android:paddingTop="@dimen/activity_vertical_margin"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                tools:context="by.mrkip.apps.epamandroidtraining.MainActivity"
-                tools:showIn="@layout/activity_main">
+<android.support.percent.PercentRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="by.mrkip.apps.epamandroidtraining.MainActivity"
+    tools:showIn="@layout/activity_main">
+
 
     <TextView
         android:id="@+id/mm_txView"
-        android:layout_width="wrap_content"
+        android:background="@color/colorAccent"
+        android:gravity="center"
+        android:text="Hello World!"
+        app:layout_heightPercent="10%"
+        app:layout_widthPercent="48%"
+        />
+
+    <by.mrkip.apps.epamandroidtraining.view.IcButton
+        style="@style/InButtonBlue"
         android:layout_height="wrap_content"
-        android:text="Hello World!"/>
-</RelativeLayout>
+        android:text="@string/surrounded_button"
+        app:layout_marginLeftPercent="50%"
+        app:layout_marginTopPercent="12%"
+        app:layout_widthPercent="50%"
+        app:leftIcon="@drawable/ic_arrow_forward_black_24dp"
+        app:rightIcon="@drawable/ic_arrow_back_black_24dp"
+        app:topIcon="@drawable/ic_arrow_downward_black_24dp"
+        app:underIcon="@drawable/ic_arrow_upward_black_24dp"/>
+
+</android.support.percent.PercentRelativeLayout>

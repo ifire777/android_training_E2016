@@ -6,13 +6,14 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="icButtonStyle">@style/MyYellowButton</item>
     </style>
 
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
 
+    <style name="MyYellowButton" parent="Widget.AppCompat.Button">
+        <item name="android:background">@color/colorPrimaryDark</item>
+        <item name="android:textAppearance">@style/TextAppearance.InBtnText</item>
+    </style>
 
 
     <style name="InButton" parent="Widget.AppCompat.Button">
@@ -31,8 +32,9 @@
         <item name="android:textSize">11sp</item>
         <item name="android:textColor">@color/in_color_primary</item>
     </style>
+
     <style name="TextAppearance.InButtonBlueText" parent="TextAppearance.InBtnText">
-       <item name="android:textColor">@color/in_bg_white</item>
+        <item name="android:textColor">@color/in_bg_white</item>
     </style>
 
 </resources>

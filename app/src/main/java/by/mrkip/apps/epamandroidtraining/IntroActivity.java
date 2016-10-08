@@ -17,6 +17,7 @@ public class IntroActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+
 		super.onCreate(savedInstanceState);
 		// setContentView(R.layout.activity_main);
 		STATUS_VALUE = Integer.valueOf(new SharedPrefManager(APP_STORAGE, this).getStringParam(STATUS));
