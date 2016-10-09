@@ -12,14 +12,19 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import by.mrkip.apps.epamandroidtraining.dataobjects.UserProfile;
 import by.mrkip.apps.epamandroidtraining.util.SharedPrefManager;
 
 public class MainActivity extends AppCompatActivity implements View.OnTouchListener {
 	public static final String STATUS = "status";
 
+
+
 	private String msg = "MyAppLogTag";
 	private TextView tv;
 	private RelativeLayout cl;
+
+	private UserProfile userProfile;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +37,15 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 		cl = (RelativeLayout) findViewById(R.id.content_main);
 		FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 		tv = (TextView) findViewById(R.id.mm_txView);
+
+		Bundle extras = getIntent().getExtras();
+
+
+		if (extras!=null){
+			userProfile= (UserProfile) extras.getSerializable("User");
+		}
+
+		tv.setText(userProfile.getBirthSeason(userProfile.getBirthDate()));
 
 		cl.setOnTouchListener(this);
 		// tv.setOnTouchListener(this);

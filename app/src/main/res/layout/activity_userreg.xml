@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.percent.PercentRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:gravity="center"
+        android:text="@string/ur_user_name"
+        app:layout_heightPercent="10%"
+        app:layout_marginLeftPercent="5%"
+        app:layout_marginTopPercent="15%"
+        app:layout_widthPercent="20%"/>
+
+    <EditText
+        android:id="@+id/et_name"
+        android:background="@color/in_color_grey"
+        android:gravity="center"
+        app:layout_heightPercent="10%"
+        app:layout_marginLeftPercent="30%"
+        app:layout_marginTopPercent="15%"
+        app:layout_widthPercent="30%"/>
+
+    <by.mrkip.apps.epamandroidtraining.view.IcButton
+        android:id="@+id/bt_checkname"
+        style="@style/InButtonBlue"
+        android:layout_height="wrap_content"
+        android:text="@string/ur_check"
+        app:layout_heightPercent="10%"
+        app:layout_marginLeftPercent="65%"
+        app:layout_marginTopPercent="15%"
+        app:layout_widthPercent="25%"
+        app:leftIcon="@drawable/ic_arrow_forward_black_24dp"/>
+
+
+    <TextView
+        android:id="@+id/tv_email"
+        android:gravity="center"
+        android:text="@string/e_mail"
+        app:layout_heightPercent="10%"
+        app:layout_marginLeftPercent="5%"
+        app:layout_marginTopPercent="30%"
+        app:layout_widthPercent="20%"/>
+
+    <EditText
+        android:id="@+id/et_email"
+        android:background="@color/in_color_grey"
+        android:gravity="center"
+        app:layout_heightPercent="10%"
+        app:layout_widthPercent="60%"
+        app:layout_marginLeftPercent="30%"
+        app:layout_marginTopPercent="30%"
+       />
+
+
+    <TextView
+        android:id="@+id/tv_captcha"
+        android:layout_width="wrap_content"
+        android:background="@color/colorAccent"
+        android:gravity="center"
+        app:layout_heightPercent="10%"
+        app:layout_marginLeftPercent="40%"
+        app:layout_marginTopPercent="45%"
+        app:layout_widthPercent="35%"/>
+
+    <EditText
+        android:id="@+id/et_captcha"
+        android:background="@color/in_color_grey"
+        android:gravity="center"
+        app:layout_heightPercent="10%"
+        app:layout_marginLeftPercent="5%"
+        app:layout_marginTopPercent="45%"
+        app:layout_widthPercent="35%"/>
+
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/bt_save"
+        style="@style/InButton"
+        android:text="@string/save"
+        app:layout_heightPercent="10%"
+        app:layout_marginLeftPercent="25%"
+        app:layout_marginTopPercent="70%"
+        app:layout_widthPercent="50%"    />
+
+
+</android.support.percent.PercentRelativeLayout>
