@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 			userProfile= (UserProfile) extras.getSerializable("User");
 		}
 
-		tv.setText(userProfile.getBirthSeason(userProfile.getBirthDate()));
+		tv.setText(userProfile.getName());
 
 		cl.setOnTouchListener(this);
 		// tv.setOnTouchListener(this);
