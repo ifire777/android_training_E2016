@@ -6,13 +6,21 @@
     android:layout_height="match_parent"
     >
 
+    <by.mrkip.apps.epamandroidtraining.view.DayWeatherCard
+        android:id="@+id/card_dayweather"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_marginLeftPercent="10%"
+        app:layout_marginTopPercent="2%"/>
+
+
     <TextView
         android:id="@+id/tv_name"
         android:gravity="center"
         android:text="@string/ur_user_name"
         app:layout_heightPercent="10%"
         app:layout_marginLeftPercent="5%"
-        app:layout_marginTopPercent="15%"
+        app:layout_marginTopPercent="17%"
         app:layout_widthPercent="20%"/>
 
     <EditText
@@ -21,7 +29,7 @@
         android:gravity="center"
         app:layout_heightPercent="10%"
         app:layout_marginLeftPercent="30%"
-        app:layout_marginTopPercent="15%"
+        app:layout_marginTopPercent="17%"
         app:layout_widthPercent="30%"/>
 
     <by.mrkip.apps.epamandroidtraining.view.IcButton
@@ -31,7 +39,7 @@
         android:text="@string/ur_check"
         app:layout_heightPercent="10%"
         app:layout_marginLeftPercent="65%"
-        app:layout_marginTopPercent="15%"
+        app:layout_marginTopPercent="17%"
         app:layout_widthPercent="25%"
         app:leftIcon="@drawable/ic_arrow_forward_black_24dp"/>
 
@@ -50,10 +58,10 @@
         android:background="@color/in_color_grey"
         android:gravity="center"
         app:layout_heightPercent="10%"
-        app:layout_widthPercent="60%"
         app:layout_marginLeftPercent="30%"
         app:layout_marginTopPercent="30%"
-       />
+        app:layout_widthPercent="60%"
+        />
 
 
     <TextView
@@ -83,7 +91,7 @@
         app:layout_heightPercent="10%"
         app:layout_marginLeftPercent="25%"
         app:layout_marginTopPercent="70%"
-        app:layout_widthPercent="50%"    />
+        app:layout_widthPercent="50%"/>
 
 
 </android.support.percent.PercentRelativeLayout>
