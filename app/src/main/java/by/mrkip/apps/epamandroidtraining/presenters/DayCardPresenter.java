@@ -48,7 +48,7 @@ public class DayCardPresenter implements IDayCardContract.Presenter {
 					DayCard response = new DayCard(bean.getWeatherType(), bean.getTempC(), bean.getHumidity(), bean.getWindSpeed());
 					notifyResponse(response);
 				} catch (IOException e) {
-					Log.e(TAG, "run: ", e);
+					Log.e(TAG, "run1:  ", e);
 					notifyError(e);
 				}
 			}

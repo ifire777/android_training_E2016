@@ -1,11 +1,7 @@
 package by.mrkip.apps.epamandroidtraining;
 
 import com.google.api.client.extensions.android.http.AndroidHttp;
-import com.google.api.client.googleapis.services.AbstractGoogleClientRequest;
-import com.google.api.client.googleapis.services.GoogleClientRequestInitializer;
-import com.google.api.client.json.jackson2.JacksonFactory;
-
-import java.io.IOException;
+import com.google.api.client.extensions.android.json.AndroidJsonFactory;
 
 import by.mrkip.backend.weather.myApi.MyApi;
 
@@ -32,16 +28,8 @@ public class ApiManager {
 
 	public MyApi trainingsApi() {
 		if (appEngineApi == null) {
-			MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(),
-					JacksonFactory.getDefaultInstance(), null)
-					.setApplicationName(BuildConfig.APPLICATION_ID)
-					.setRootUrl(APP_ENGINE_BASE_URL)
-					.setGoogleClientRequestInitializer(new GoogleClientRequestInitializer() {
-						@Override
-						public void initialize(AbstractGoogleClientRequest<?> abstractGoogleClientRequest) throws IOException {
-							abstractGoogleClientRequest.setDisableGZipContent(true);
-						}
-					});
+			MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(), new AndroidJsonFactory(), null)
+					.setRootUrl("https://weatherhistorybackup.appspot.com/_ah/api/");
 			appEngineApi = builder.build();
 		}
 		return appEngineApi;

@@ -1,15 +1,13 @@
 package com.example.kip.myapplication.backend;
 
-import javax.inject.Named;
-
 public class DayWeatherCard {
-	@Named
+
 	private String weatherType;
-	@Named
+
 	private String tempC;
-	@Named
+
 	private String humidity;
-	@Named
+
 	private String windSpeed;
 
 	public String getWindSpeed() {
