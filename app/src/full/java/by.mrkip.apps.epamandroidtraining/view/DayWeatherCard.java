@@ -10,9 +10,6 @@ import by.mrkip.apps.epamandroidtraining.contracts.IDayCardContract;
 import by.mrkip.apps.epamandroidtraining.model.DayCard;
 import by.mrkip.apps.epamandroidtraining.presenters.DayCardPresenter;
 
-/**
- * Created by kip on 13.10.2016.
- */
 
 public class DayWeatherCard extends CardView implements IDayCardContract.DayCardView {
 	private IDayCardContract.Presenter presenter;

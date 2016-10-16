@@ -11,7 +11,6 @@ import by.mrkip.backend.weather.myApi.MyApi;
 
 public class ApiManager {
 
-	public static final String APP_ENGINE_BASE_URL = "http://10.0.2.2:8080/_ah/api/";
 
 	private static ApiManager sInstance;
 	private static MyApi appEngineApi = null;
@@ -29,7 +28,7 @@ public class ApiManager {
 	public MyApi trainingsApi() {
 		if (appEngineApi == null) {
 			MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(), new AndroidJsonFactory(), null)
-					.setRootUrl("https://weatherhistorybackup.appspot.com/_ah/api/");
+					.setRootUrl(BuildConfig.BACKEND_URL);
 			appEngineApi = builder.build();
 		}
 		return appEngineApi;

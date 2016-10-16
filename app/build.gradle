@@ -3,6 +3,10 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 24
     buildToolsVersion "24.0.2"
+
+    def backendUrlRemove = '"https://weatherhistorybackup.appspot.com/_ah/api/"'
+    def backendUrlLocal = '"http://10.0.2.2:8080/_ah/api/"'
+
     defaultConfig {
         applicationId "by.mrkip.apps.epamandroidtraining"
         minSdkVersion 14
@@ -13,11 +17,44 @@ android {
         vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "BACKEND_URL", backendUrlLocal
+
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            buildConfigField "String", "BACKEND_URL", backendUrlRemove
+
         }
     }
+
+    productFlavors {
+        demo {
+            // applicationId "com.example.myapp.demo"
+            versionName "1.0-demo"
+        }
+        full {
+
+            // applicationId "com.example.myapp.full"
+            versionName "1.0-full"
+        }
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            def outputFile = output.outputFile
+            if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                def fileName = castomAppName + "~" + variant.name + "~" + versionName + ".apk"
+                output.outputFile = new File(outputFile.parent, fileName)
+            }
+        }
+    }
+
+
 }
 
 dependencies {
@@ -37,3 +74,4 @@ dependencies {
     compile project(path: ':util-lib')
     compile project(path: ':backend', configuration: 'android-endpoints')
 }
+ext.castomAppName = "E-Training"
