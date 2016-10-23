@@ -20,6 +20,7 @@ public class DayWeatherCard extends CardView implements IDayCardContract.DayCard
 	private TextView tvDegree;
 	private TextView tvHumisity;
 	private TextView tvWindSpeed;
+	private TextView tvDate;
 
 	public String deg;
 	public String hum;
@@ -61,6 +62,7 @@ public class DayWeatherCard extends CardView implements IDayCardContract.DayCard
 		tvDegree = (TextView) findViewById(R.id.dwc_temperature);
 		tvHumisity = (TextView) findViewById(R.id.dwc_humisity);
 		tvWindSpeed = (TextView) findViewById(R.id.dwc_windspeed);
+		tvDate = (TextView) findViewById(R.id.dwc_todaydate);
 
 		//deg = String.valueOf(dayCard.getTempC());
 		tvDegree.setText(dayCard.getTempC());
@@ -68,7 +70,7 @@ public class DayWeatherCard extends CardView implements IDayCardContract.DayCard
 		tvHumisity.setText(dayCard.getHumidity());
 		//wind = dayCard.getWindSpeed();
 		tvWindSpeed.setText(dayCard.getWindSpeed());
-
+		tvDate.setText(dayCard.getDate().toString());
 
 	}
 

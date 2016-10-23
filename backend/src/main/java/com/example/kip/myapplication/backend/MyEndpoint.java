@@ -54,7 +54,12 @@ String getUrl=new urlGETStrBuilder(WEATHER_URL)
 		.addParam("key","de2eebb1950884eb9e557aaf3197f")
 		.addParam("tp","24")
 		.getUrl();
-		String data = new HttpClient().get(getUrl);
+		String data = null;
+		try {
+			data = new HttpClient().get(getUrl);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 
 		try {

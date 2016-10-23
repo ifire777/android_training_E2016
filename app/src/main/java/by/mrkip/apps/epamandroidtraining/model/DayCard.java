@@ -1,5 +1,8 @@
 package by.mrkip.apps.epamandroidtraining.model;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
  * Created by kip on 14.10.2016.
  */
@@ -9,6 +12,16 @@ public class DayCard {
 	private String tempC;
 	private String humidity;
 	private String windSpeed;
+	private String date;
+
+
+	public DayCard(JSONObject jsonObj) throws JSONException {
+		this.setTempC(jsonObj.getString("temp_C"));
+		this.setWeatherType(jsonObj.getJSONArray("weatherDesc").getJSONObject(0).getString("value"));
+		this.setHumidity(jsonObj.getString("humidity"));
+		this.setWindSpeed(String.valueOf(Math.round((jsonObj.getDouble("windspeedKmph") / 3.6) * 10d) / 10d));
+
+	}
 
 	public DayCard(String weatherType, String tempC, String humidity, String windSpeed) {
 		this.setWeatherType(weatherType);
@@ -17,6 +30,13 @@ public class DayCard {
 		this.setWindSpeed(windSpeed);
 	}
 
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
 
 	public String getWeatherType() {
 		return weatherType;
@@ -31,7 +51,7 @@ public class DayCard {
 	}
 
 	public void setTempC(String tempC) {
-		this.tempC = tempC;
+		this.tempC = tempC + "C";
 	}
 
 	public String getHumidity() {
@@ -39,7 +59,7 @@ public class DayCard {
 	}
 
 	public void setHumidity(String humidity) {
-		this.humidity = humidity;
+		this.humidity = "humidity: " + humidity + "%";
 	}
 
 	public String getWindSpeed() {
@@ -47,9 +67,8 @@ public class DayCard {
 	}
 
 	public void setWindSpeed(String windSpeed) {
-		this.windSpeed = windSpeed;
+		this.windSpeed = "wind: " + windSpeed + "m/s";
 	}
-
 
 
 }
