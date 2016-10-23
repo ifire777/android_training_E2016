@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import by.mrkip.apps.epamandroidtraining.dataobjects.UserProfile;
 import by.mrkip.apps.epamandroidtraining.util.CapchaGenerator;
+import by.mrkip.apps.epamandroidtraining.util.ContextHolder;
 import by.mrkip.apps.epamandroidtraining.util.SimpleChecker;
 import by.mrkip.apps.epamandroidtraining.view.DayWeatherCard;
 import by.mrkip.apps.epamandroidtraining.view.IcButton;
@@ -36,7 +37,7 @@ public class UserRegActivity extends AppCompatActivity implements View.OnClickLi
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_userreg);
-
+		ContextHolder.getInstance().setContext(getApplicationContext());
 
 		simpleChecker = new SimpleChecker();
 
