@@ -28,4 +28,9 @@
     <string name="save">Save</string>
     <string name="e_mail">E-mail:</string>
     <string name="winter">Winter</string>
+    <string name="wc_C">C</string>
+    <string name="wc_humidity">"humidity: "</string>
+    <string name="wc_persent">%</string>
+    <string name="wc_wind">"wind: "</string>
+    <string name="wc_speed_units">m/s</string>
 </resources>

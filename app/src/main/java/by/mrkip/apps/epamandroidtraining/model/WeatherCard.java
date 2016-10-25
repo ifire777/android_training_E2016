@@ -1,34 +1,31 @@
 package by.mrkip.apps.epamandroidtraining.model;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 
-/**
- * Created by kip on 14.10.2016.
- */
+import android.content.Context;
 
-public class DayCard {
+import by.mrkip.apps.epamandroidtraining.R;
+import by.mrkip.apps.epamandroidtraining.util.ContextHolder;
+
+public class WeatherCard {
+
 	private String weatherType;
 	private String tempC;
 	private String humidity;
 	private String windSpeed;
 	private String date;
+	private Context context= ContextHolder.getInstance().getContext();
 
-
-	public DayCard(JSONObject jsonObj) throws JSONException {
-		this.setTempC(jsonObj.getString("temp_C"));
-		this.setWeatherType(jsonObj.getJSONArray("weatherDesc").getJSONObject(0).getString("value"));
-		this.setHumidity(jsonObj.getString("humidity"));
-		this.setWindSpeed(String.valueOf(Math.round((jsonObj.getDouble("windspeedKmph") / 3.6) * 10d) / 10d));
-
+	public WeatherCard() {
 	}
 
-	public DayCard(String weatherType, String tempC, String humidity, String windSpeed) {
+	public WeatherCard(String weatherType, String tempC, String humidity, String windSpeed) {
 		this.setWeatherType(weatherType);
 		this.setTempC(tempC);
 		this.setHumidity(humidity);
 		this.setWindSpeed(windSpeed);
 	}
+
+
 
 	public String getDate() {
 		return date;
@@ -51,7 +48,8 @@ public class DayCard {
 	}
 
 	public void setTempC(String tempC) {
-		this.tempC = tempC + "C";
+
+		this.tempC = tempC + context.getString(R.string.wc_C);
 	}
 
 	public String getHumidity() {
@@ -59,7 +57,7 @@ public class DayCard {
 	}
 
 	public void setHumidity(String humidity) {
-		this.humidity = "humidity: " + humidity + "%";
+		this.humidity = context.getString(R.string.wc_humidity) + humidity + context.getString(R.string.wc_persent);
 	}
 
 	public String getWindSpeed() {
@@ -67,7 +65,7 @@ public class DayCard {
 	}
 
 	public void setWindSpeed(String windSpeed) {
-		this.windSpeed = "wind: " + windSpeed + "m/s";
+		this.windSpeed = context.getString(R.string.wc_wind) + windSpeed + context.getString(R.string.wc_speed_units);
 	}
 
 

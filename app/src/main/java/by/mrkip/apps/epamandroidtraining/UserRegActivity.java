@@ -13,7 +13,7 @@ import by.mrkip.apps.epamandroidtraining.dataobjects.UserProfile;
 import by.mrkip.apps.epamandroidtraining.util.CapchaGenerator;
 import by.mrkip.apps.epamandroidtraining.util.ContextHolder;
 import by.mrkip.apps.epamandroidtraining.util.SimpleChecker;
-import by.mrkip.apps.epamandroidtraining.view.DayWeatherCard;
+import by.mrkip.apps.epamandroidtraining.view.DayWeatherCardView;
 import by.mrkip.apps.epamandroidtraining.view.IcButton;
 
 
@@ -30,7 +30,7 @@ public class UserRegActivity extends AppCompatActivity implements View.OnClickLi
 	private Button btSave;
 
 	private String captchaVal;
-	private DayWeatherCard dayWeatherCard;
+	private DayWeatherCardView dayWeatherCard;
 
 
 	@Override
@@ -55,7 +55,7 @@ public class UserRegActivity extends AppCompatActivity implements View.OnClickLi
 		captchaVal = new CapchaGenerator().getCapcha();
 		tvCaptcha.setText(captchaVal);
 
-		dayWeatherCard = (DayWeatherCard) findViewById(R.id.card_dayweather);
+		dayWeatherCard = (DayWeatherCardView) findViewById(R.id.card_dayweather);
 
 
 				/*TextView tvWeatherInfo = (TextView) findViewById(R.id.tv_weatherinfo);

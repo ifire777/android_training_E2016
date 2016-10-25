@@ -6,13 +6,12 @@ import android.util.AttributeSet;
 import android.widget.TextView;
 
 import by.mrkip.apps.epamandroidtraining.R;
-import by.mrkip.apps.epamandroidtraining.contracts.IDayCardContract;
-import by.mrkip.apps.epamandroidtraining.model.DayCard;
+import by.mrkip.apps.epamandroidtraining.contracts.IWeatherCardContract;
 import by.mrkip.apps.epamandroidtraining.presenters.DayCardPresenter;
 
 
-public class DayWeatherCard extends CardView implements IDayCardContract.DayCardView {
-	private IDayCardContract.Presenter presenter;
+public class DayWeatherCardView extends CardView implements IWeatherCardContract.DayCardView {
+	private IWeatherCardContract.Presenter presenter;
 
 	private TextView tvDegree;
 	private TextView tvHumisity;
@@ -24,19 +23,19 @@ public class DayWeatherCard extends CardView implements IDayCardContract.DayCard
 	public String wind;
 
 
-	public DayWeatherCard(Context context) {
+	public DayWeatherCardView(Context context) {
 		super(context);
 		presenter = new DayCardPresenter(this);
 		init();
 	}
 
-	public DayWeatherCard(Context context, AttributeSet attrs) {
+	public DayWeatherCardView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		presenter = new DayCardPresenter(this);
 		init();
 	}
 
-	public DayWeatherCard(Context context, AttributeSet attrs, int defStyleAttr) {
+	public DayWeatherCardView(Context context, AttributeSet attrs, int defStyleAttr) {
 		super(context, attrs, defStyleAttr);
 		presenter = new DayCardPresenter(this);
 		init();
@@ -45,27 +44,21 @@ public class DayWeatherCard extends CardView implements IDayCardContract.DayCard
 	}
 
 	private void init() {
-
-
-		presenter.onReady();
-
+		presenter.onReady("53.6667", "23.8333", "2016-10-23");
 
 	}
 
 
 	@Override
-	public void showData(DayCard dayCard) {
+	public void showData(by.mrkip.apps.epamandroidtraining.model.DayWeatherCard dayCard) {
 		inflate(getContext(), R.layout.view_daycard, this);
 		tvDegree = (TextView) findViewById(R.id.dwc_temperature);
 		tvHumisity = (TextView) findViewById(R.id.dwc_humisity);
 		tvWindSpeed = (TextView) findViewById(R.id.dwc_windspeed);
 		tvDate = (TextView) findViewById(R.id.dwc_todaydate);
 
-		//deg = String.valueOf(dayCard.getTempC());
 		tvDegree.setText(dayCard.getTempC());
-		//hum = String.valueOf(dayCard.getHumidity());
 		tvHumisity.setText(dayCard.getHumidity());
-		//wind = dayCard.getWindSpeed();
 		tvWindSpeed.setText(dayCard.getWindSpeed());
 		tvDate.setText(dayCard.getDate().toString());
 

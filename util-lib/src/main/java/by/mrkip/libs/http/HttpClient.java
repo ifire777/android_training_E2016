@@ -1,6 +1,7 @@
 package by.mrkip.libs.http;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -9,6 +10,35 @@ import java.net.URL;
 import java.util.Map;
 
 public class HttpClient {
+
+	public static final String REQUEST_TYPE_GET = "GET";
+
+
+	public interface ResultConverter<Result> {
+
+		Result convert(InputStream inputStream);
+
+	}
+
+	public <Result> Result getResult(String url, ResultConverter<Result> resultConverter) throws IOException {
+		HttpURLConnection connection = null;
+		InputStream inputStream = null;
+		try {
+			URL reqUrl = new URL(url);
+			connection = ((HttpURLConnection) reqUrl.openConnection());
+			connection.setRequestMethod(REQUEST_TYPE_GET);
+			inputStream = connection.getInputStream();
+			return resultConverter.convert(inputStream);
+		} finally {
+			if (inputStream != null) {
+				inputStream.close();
+			}
+			if (connection != null) {
+				connection.disconnect();
+			}
+		}
+	}
+
 
 	public String get(String url) throws Exception {
 		return doRequest(url, "GET", null, null);
@@ -71,6 +101,7 @@ public class HttpClient {
 		}
 		return response;
 	}
+
 
 	private void applyBody(HttpURLConnection httpURLConnection, String body) throws Exception {
 		byte[] outputInBytes = body.getBytes("UTF-8");

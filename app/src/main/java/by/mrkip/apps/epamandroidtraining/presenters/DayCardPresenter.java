@@ -6,91 +6,84 @@ import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 
 import by.mrkip.apps.epamandroidtraining.ApiManager;
-import by.mrkip.apps.epamandroidtraining.contracts.IDayCardContract;
-import by.mrkip.apps.epamandroidtraining.dataCasting.DateCast;
-import by.mrkip.apps.epamandroidtraining.model.DayCard;
+import by.mrkip.apps.epamandroidtraining.contracts.IWeatherCardContract;
+import by.mrkip.apps.epamandroidtraining.model.DayWeatherCard;
 import by.mrkip.apps.epamandroidtraining.model.HttpRequestModel;
-import by.mrkip.apps.epamandroidtraining.model.dayCardRequestModel.RootDataJO;
-import by.mrkip.apps.epamandroidtraining.model.dayCardRequestModel.UFDate;
 import by.mrkip.backend.weather.myApi.MyApi;
-import by.mrkip.backend.weather.myApi.model.DayWeatherCard;
 import by.mrkip.libs.http.HttpClient;
 import by.mrkip.libs.http.httpUtils.urlGETStrBuilder;
 
 import static android.content.ContentValues.TAG;
 
-/**
- * Created by kip on 13.10.2016.
- */
 
-public class DayCardPresenter implements IDayCardContract.Presenter {
-	public static final String WEATHER_URL = "http://api.worldweatheronline.com/free/v2/weather.ashx";
-	public static final String WEATHER_API_KEY = "de2eebb1950884eb9e557aaf3197f";
+public class DayCardPresenter implements IWeatherCardContract.Presenter {
+	private static final String FUTURE_WEATHER_URL = "http://api.worldweatheronline.com/free/v2/weather.ashx";
+	private static final String PAST_WEATHER_URL = "http://api.worldweatheronline.com/free/v2/weather.ashx";
+	private static final String WEATHER_API_KEY = "de2eebb1950884eb9e557aaf3197f";
+	private static final String QUERY_PARAM_Q = "q";
+	private static final String QUERY_PARAM_FORMAT = "format";
+	private static final String QUERY_PARAM_DATE = "date";
+	private static final String QUERY_PARAM_INCLUDELOCATION = "includelocation";
+	private static final String QUERY_PARAM_KEY = "key";
+	private static final String QUERY_PARAM_TP = "tp";
+	private static final String QUERY_PARAM_ENDDATE = "enddate";
 
 
-	private IDayCardContract.DayCardView view;
+	private IWeatherCardContract.DayCardView view;
 	private Handler handler;
 
-	public DayCardPresenter(@NonNull IDayCardContract.DayCardView view) {
+	public DayCardPresenter(@NonNull IWeatherCardContract.DayCardView view) {
 		this.view = view;
 		handler = new Handler(Looper.getMainLooper());
 	}
 
 	@Override
-	public void onReady() {
+	public void onReady(String coorLan, String coorLon, String dt) {
 		view.showProgress(true);
 		//loadDataFromSelfBackend();
-		loadDayCardData("53.6667", "23.8333", "2016-10-23");
+		loadDayCardData(getFutureDayWeatherQuery(coorLan, coorLon, dt));
 	}
 
-	private void loadDayCardData(final String coorLan, final String coorLon, final String dt) {
+	@Override
+	public void onReady(String coorLan, String coorLon, String startDt, String endDt) {
+		view.showProgress(true);
+		//loadDataFromSelfBackend();
+		loadDayCardData(getPastDayWeatherQuery(coorLan, coorLon, startDt, endDt));
+	}
+
+	private void loadDayCardData(final String pGetUrl) {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
 				HttpRequestModel httpGet = new HttpRequestModel();
 				HttpClient httpClient = new HttpClient();
 				try {
-					String getUrl = new urlGETStrBuilder(WEATHER_URL)
-							.addParam("q", coorLan + "," + coorLon)
-							.addParam("format", "json")
-							.addParam("date", dt)
-							.addParam("includelocation", "yes")
-							.addParam("key", WEATHER_API_KEY)
-							.addParam("tp", "24")
-							.getUrl();
 
-					httpGet.setUrl(getUrl);
+					httpGet.setUrl(pGetUrl);
 
 					String responseStr = httpClient.get(httpGet.getUrl());
 
-					//TODO: Do I need to implement full chain of json objects/arrays in data model or this way is OK?
 					JSONObject dayCardJSONObj = new JSONObject(responseStr)
 							.getJSONObject("data")
 							.getJSONArray("current_condition")
 							.getJSONObject(0);
-					DayCard respObject = new DayCard(dayCardJSONObj);
+					DayWeatherCard respObject = new DayWeatherCard().fillFutureWeatherFromJson(dayCardJSONObj);
 
 
-					Gson gson = new GsonBuilder().registerTypeAdapter(UFDate.class, new DateCast()).create();
-					RootDataJO dayCardByGson = gson.fromJson(responseStr, RootDataJO.class);
+					//Gson gson = new GsonBuilder().registerTypeAdapter(UFDate.class, new DateCast()).create();
+					//RootDataJO dayCardByGson = gson.fromJson(responseStr, RootDataJO.class);
 					//fill some response Object fild from Gson-way parsed object
-					respObject.setDate(dayCardByGson.getData().getWeatherJA().get(0).getCastomDate().getUfDate());
+					//respObject.setDate(dayCardByGson.getData().getWeatherJA().get(0).getCastomDate().getUfDate());
 
 					notifyResponse(respObject);
 
-				} catch (IOException e) {
-					Log.e(TAG, this.toString() + ":", e);
-					notifyError(e);
-				} catch (JSONException e) {
+				} catch (IOException | JSONException e) {
 					Log.e(TAG, this.toString() + ":", e);
 					notifyError(e);
 				} catch (Exception e) {
@@ -109,9 +102,9 @@ public class DayCardPresenter implements IDayCardContract.Presenter {
 
 				try {
 					MyApi.GetDayWeather call = ApiManager.get().trainingsApi().getDayWeather("53.6667", "23.8333");
-					DayWeatherCard bean;
+					by.mrkip.backend.weather.myApi.model.DayWeatherCard bean;
 					bean = call.execute();
-					DayCard response = new DayCard(bean.getWeatherType(), bean.getTempC(), bean.getHumidity(), bean.getWindSpeed());
+					DayWeatherCard response = new DayWeatherCard(bean.getWeatherType(), bean.getTempC(), bean.getHumidity(), bean.getWindSpeed());
 					notifyResponse(response);
 				} catch (IOException e) {
 					Log.e(TAG, "run1:  ", e);
@@ -122,7 +115,7 @@ public class DayCardPresenter implements IDayCardContract.Presenter {
 
 	}
 
-	private void notifyResponse(final DayCard response) {
+	private void notifyResponse(final DayWeatherCard response) {
 		handler.post(new Runnable() {
 			@Override
 			public void run() {
@@ -141,4 +134,29 @@ public class DayCardPresenter implements IDayCardContract.Presenter {
 			}
 		});
 	}
+
+
+	private String getFutureDayWeatherQuery(String coorLan, String coorLon, String dt) {
+		return new urlGETStrBuilder(FUTURE_WEATHER_URL)
+				.addParam(QUERY_PARAM_Q, coorLan + "," + coorLon)
+				.addParam(QUERY_PARAM_FORMAT, "json")
+				.addParam(QUERY_PARAM_DATE, dt)
+				.addParam(QUERY_PARAM_INCLUDELOCATION, "yes")
+				.addParam(QUERY_PARAM_KEY, WEATHER_API_KEY)
+				.addParam(QUERY_PARAM_TP, "24")
+				.getUrl();
+	}
+
+	private String getPastDayWeatherQuery(String coorLan, String coorLon, String startDt, String endDt) {
+		return new urlGETStrBuilder(FUTURE_WEATHER_URL)
+				.addParam(QUERY_PARAM_Q, coorLan + "," + coorLon)
+				.addParam(QUERY_PARAM_FORMAT, "json")
+				.addParam(QUERY_PARAM_DATE, startDt)
+				.addParam(QUERY_PARAM_ENDDATE, endDt)
+				.addParam(QUERY_PARAM_INCLUDELOCATION, "yes")
+				.addParam(QUERY_PARAM_KEY, WEATHER_API_KEY)
+				.addParam(QUERY_PARAM_TP, "24")
+				.getUrl();
+	}
+
 }
