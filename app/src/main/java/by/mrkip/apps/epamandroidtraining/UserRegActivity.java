@@ -7,10 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.ImageView;
 
 import by.mrkip.apps.epamandroidtraining.dataobjects.UserProfile;
-import by.mrkip.apps.epamandroidtraining.util.CapchaGenerator;
+import by.mrkip.apps.epamandroidtraining.imageLoader.SimpleImageLoader;
 import by.mrkip.apps.epamandroidtraining.util.ContextHolder;
 import by.mrkip.apps.epamandroidtraining.util.SimpleChecker;
 import by.mrkip.apps.epamandroidtraining.view.DayWeatherCardView;
@@ -24,7 +24,7 @@ public class UserRegActivity extends AppCompatActivity implements View.OnClickLi
 	private EditText etCaptcha;
 	private EditText etMail;
 
-	private TextView tvCaptcha;
+	private ImageView tvCaptcha;
 
 	private IcButton btCheckName;
 	private Button btSave;
@@ -39,23 +39,29 @@ public class UserRegActivity extends AppCompatActivity implements View.OnClickLi
 		setContentView(R.layout.activity_userreg);
 		ContextHolder.getInstance().setContext(getApplicationContext());
 
+
 		simpleChecker = new SimpleChecker();
 
 		etName = (EditText) findViewById(R.id.et_name);
 		etCaptcha = (EditText) findViewById(R.id.et_captcha);
 		etMail = (EditText) findViewById(R.id.et_email);
 
-		tvCaptcha = (TextView) findViewById(R.id.tv_captcha);
+		tvCaptcha = (ImageView) findViewById(R.id.tv_captcha);
 
 		btSave = (Button) findViewById(R.id.bt_save);
 		btSave.setOnClickListener(this);
 		btCheckName = (IcButton) findViewById(R.id.bt_checkname);
 		btCheckName.setOnClickListener(this);
 
-		captchaVal = new CapchaGenerator().getCapcha();
+		/*captchaVal = new CapchaGenerator().getCapcha();
 		tvCaptcha.setText(captchaVal);
+*/
 
-		dayWeatherCard = (DayWeatherCardView) findViewById(R.id.card_dayweather);
+		final SimpleImageLoader simpleImageLoader = ((App)getApplication()).getSimpleImageLoader();
+		simpleImageLoader.drawBitmap(tvCaptcha, "http://captcha.ru/captcha/");
+
+
+		//dayWeatherCard = (DayWeatherCardView) findViewById(R.id.card_dayweather);
 
 
 				/*TextView tvWeatherInfo = (TextView) findViewById(R.id.tv_weatherinfo);

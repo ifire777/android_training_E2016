@@ -1,5 +1,8 @@
 package by.mrkip.apps.epamandroidtraining.presenters;
 
+
+import android.content.Context;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -11,23 +14,26 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import by.mrkip.apps.epamandroidtraining.R;
+import by.mrkip.apps.epamandroidtraining.helpObjects.AppContextIns;
 import by.mrkip.apps.epamandroidtraining.model.WeatherCard;
 import by.mrkip.libs.http.HttpClient;
 
-import static by.mrkip.apps.epamandroidtraining.model.DayWeatherCard.KEY_VALUE;
-
-
-public class PastWeatherListPrecenter  implements HttpClient.ResultConverter<List<WeatherCard>> {
+public class PastWeatherListPresenter implements HttpClient.ResultConverter<List<WeatherCard>> {
 
 	private static final String TEMP_C1 = "tempC";
 	private static final String WEATHER_DESC = "weatherDesc";
 	private static final String HUMIDITY = "humidity";
 	private static final String WINDSPEED_KMPH = "windspeedKmph";
+	private static final String WEATHER_ICON_URL = "weatherIconUrl";
 
 
 	private static final String VALUE_DATA = "data";
 	private static final String VALUE_WEATHER = "weather";
 	private static final String VALUE_HOURLY = "hourly";
+	public static final String KEY_VALUE = "value";
+
+	private final Context context = AppContextIns.get();
 
 
 	@Override
@@ -65,10 +71,11 @@ public class PastWeatherListPrecenter  implements HttpClient.ResultConverter<Lis
 	}
 
 	public WeatherCard fillPastWeatherFromJson(JSONObject jsonObj, WeatherCard weatherCard) throws JSONException {
-		weatherCard.setTempC(jsonObj.getString(TEMP_C1));
+		weatherCard.setTempC(jsonObj.getString(TEMP_C1) + context.getString(R.string.wc_C));
 		weatherCard.setWeatherType(jsonObj.getJSONArray(WEATHER_DESC).getJSONObject(0).getString(KEY_VALUE));
-		weatherCard.setHumidity(jsonObj.getString(HUMIDITY));
-		weatherCard.setWindSpeed(String.valueOf(Math.round((jsonObj.getDouble(WINDSPEED_KMPH) / 3.6) * 10d) / 10d));
+		weatherCard.setHumidity(context.getString(R.string.wc_humidity) + jsonObj.getString(HUMIDITY) + context.getString(R.string.wc_persent));
+		weatherCard.setWindSpeed(context.getString(R.string.wc_wind) + String.valueOf(Math.round((jsonObj.getDouble(WINDSPEED_KMPH) / 3.6) * 10d) / 10d) + context.getString(R.string.wc_speed_units));
+		weatherCard.setImageURL(jsonObj.getJSONArray(WEATHER_ICON_URL).getJSONObject(0).getString(KEY_VALUE));
 
 		return weatherCard;
 	}

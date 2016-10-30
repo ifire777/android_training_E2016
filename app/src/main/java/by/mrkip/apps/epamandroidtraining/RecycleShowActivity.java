@@ -14,7 +14,7 @@ import java.util.List;
 
 import by.mrkip.apps.epamandroidtraining.adapters.WeatherCardAdapter;
 import by.mrkip.apps.epamandroidtraining.model.WeatherCard;
-import by.mrkip.apps.epamandroidtraining.presenters.PastWeatherListPrecenter;
+import by.mrkip.apps.epamandroidtraining.presenters.PastWeatherListPresenter;
 import by.mrkip.apps.epamandroidtraining.util.ContextHolder;
 import by.mrkip.libs.http.HttpClient;
 import by.mrkip.libs.http.httpUtils.urlGETStrBuilder;
@@ -62,8 +62,6 @@ public class RecycleShowActivity extends AppCompatActivity {
 
 		this.cardsList = pList;
 		((WeatherCardAdapter) recyclerView.getAdapter()).addItems(pList);
-		//recyclerView.getAdapter().notifyItemChanged(0, pList.size());
-		//	recyclerView.getAdapter().notifyDataSetChanged();
 
 	}
 
@@ -109,7 +107,7 @@ public class RecycleShowActivity extends AppCompatActivity {
 			HttpClient httpClient = new HttpClient();
 			try {
 
-				return httpClient.getResult(args[0], new PastWeatherListPrecenter());
+				return httpClient.getResult(args[0], new PastWeatherListPresenter());
 
 			} catch (IOException e) {
 				Log.e(TAG, this.toString() + ":", e);

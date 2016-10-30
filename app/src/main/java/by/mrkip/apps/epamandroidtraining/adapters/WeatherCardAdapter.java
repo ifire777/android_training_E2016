@@ -4,18 +4,22 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import by.mrkip.apps.epamandroidtraining.App;
 import by.mrkip.apps.epamandroidtraining.R;
+import by.mrkip.apps.epamandroidtraining.imageLoader.SimpleImageLoader;
 import by.mrkip.apps.epamandroidtraining.model.WeatherCard;
 
 
 public class WeatherCardAdapter extends RecyclerView.Adapter<WeatherCardAdapter.ViewHolder> {
 	private List<WeatherCard> mDataSet;
 	private int mDataSetTypes;
+	private SimpleImageLoader simpleImageLoader=App.getSimpleImageLoader();
 
 
 	public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -29,6 +33,7 @@ public class WeatherCardAdapter extends RecyclerView.Adapter<WeatherCardAdapter.
 		private TextView tvHumisity;
 		private TextView tvWindSpeed;
 		private TextView tvDate;
+		private ImageView ivWeatherImg;
 
 		public WeatherViewHolder(View v) {
 			super(v);
@@ -37,6 +42,8 @@ public class WeatherCardAdapter extends RecyclerView.Adapter<WeatherCardAdapter.
 			tvHumisity = (TextView) v.findViewById(R.id.dwc_humisity);
 			tvWindSpeed = (TextView) v.findViewById(R.id.dwc_windspeed);
 			tvDate = (TextView) v.findViewById(R.id.dwc_todaydate);
+			ivWeatherImg= (ImageView) v.findViewById(R.id.dwc_weatherimage);
+
 		}
 
 		@Override
@@ -73,6 +80,9 @@ public class WeatherCardAdapter extends RecyclerView.Adapter<WeatherCardAdapter.
 		holder.tvHumisity.setText(mDataSet.get(position).getHumidity());
 		holder.tvWindSpeed.setText(mDataSet.get(position).getWindSpeed());
 		holder.tvDate.setText(mDataSet.get(position).getDate());
+
+		simpleImageLoader.drawBitmap(holder.ivWeatherImg,mDataSet.get(position).getImageURL());
+
 		//	}
 	}
 

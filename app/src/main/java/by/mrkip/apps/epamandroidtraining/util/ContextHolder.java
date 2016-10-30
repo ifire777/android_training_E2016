@@ -3,9 +3,9 @@ package by.mrkip.apps.epamandroidtraining.util;
 import android.content.Context;
 
 /**
- * Created by kip on 23.10.2016.
+ * Use <tt><AppContextIns></tt>
  */
-
+@Deprecated
 public final class ContextHolder {
 
 	private static ContextHolder sContextHolder;

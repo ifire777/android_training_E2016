@@ -148,7 +148,7 @@ public class DayCardPresenter implements IWeatherCardContract.Presenter {
 	}
 
 	private String getPastDayWeatherQuery(String coorLan, String coorLon, String startDt, String endDt) {
-		return new urlGETStrBuilder(FUTURE_WEATHER_URL)
+		return new urlGETStrBuilder(PAST_WEATHER_URL)
 				.addParam(QUERY_PARAM_Q, coorLan + "," + coorLon)
 				.addParam(QUERY_PARAM_FORMAT, "json")
 				.addParam(QUERY_PARAM_DATE, startDt)

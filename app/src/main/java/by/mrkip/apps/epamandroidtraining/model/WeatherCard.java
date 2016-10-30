@@ -1,11 +1,6 @@
 package by.mrkip.apps.epamandroidtraining.model;
 
 
-import android.content.Context;
-
-import by.mrkip.apps.epamandroidtraining.R;
-import by.mrkip.apps.epamandroidtraining.util.ContextHolder;
-
 public class WeatherCard {
 
 	private String weatherType;
@@ -13,7 +8,7 @@ public class WeatherCard {
 	private String humidity;
 	private String windSpeed;
 	private String date;
-	private Context context= ContextHolder.getInstance().getContext();
+	private String imageURL;
 
 	public WeatherCard() {
 	}
@@ -24,7 +19,6 @@ public class WeatherCard {
 		this.setHumidity(humidity);
 		this.setWindSpeed(windSpeed);
 	}
-
 
 
 	public String getDate() {
@@ -49,7 +43,7 @@ public class WeatherCard {
 
 	public void setTempC(String tempC) {
 
-		this.tempC = tempC + context.getString(R.string.wc_C);
+		this.tempC = tempC;
 	}
 
 	public String getHumidity() {
@@ -57,7 +51,7 @@ public class WeatherCard {
 	}
 
 	public void setHumidity(String humidity) {
-		this.humidity = context.getString(R.string.wc_humidity) + humidity + context.getString(R.string.wc_persent);
+		this.humidity =  humidity;
 	}
 
 	public String getWindSpeed() {
@@ -65,7 +59,15 @@ public class WeatherCard {
 	}
 
 	public void setWindSpeed(String windSpeed) {
-		this.windSpeed = context.getString(R.string.wc_wind) + windSpeed + context.getString(R.string.wc_speed_units);
+		this.windSpeed =  windSpeed ;
+	}
+
+	public String getImageURL() {
+		return imageURL;
+	}
+
+	public void setImageURL(String imageURL) {
+		this.imageURL = imageURL;
 	}
 
 
