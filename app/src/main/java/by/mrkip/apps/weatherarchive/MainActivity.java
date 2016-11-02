@@ -15,10 +15,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
+
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.places.AutocompleteFilter;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlaceAutocomplete;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -47,6 +58,9 @@ import static by.mrkip.apps.weatherarchive.globalObj.Api.WEATHER_API_KEY;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
 
+	private static final LatLngBounds BOUNDS_MOUNTAIN_VIEW = new LatLngBounds(new LatLng(37.398160, -122.180831), new LatLng(37.430610, -121.972090));
+	private static final int REQUEST_SELECT_PLACE = 1000;
+
 	private List<WeatherCard> cardsList;
 	private RecyclerView recyclerView;
 
@@ -62,9 +76,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		fab.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				gotoMail(view);
+				try {
+					Intent intent = new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_OVERLAY)
+							.setBoundsBias(BOUNDS_MOUNTAIN_VIEW)
+							.setFilter(new AutocompleteFilter.Builder().setTypeFilter(AutocompleteFilter.TYPE_FILTER_CITIES).build())
+							.build(MainActivity.this);
+					startActivityForResult(intent, REQUEST_SELECT_PLACE);
+				} catch (GooglePlayServicesRepairableException |
+						GooglePlayServicesNotAvailableException e) {
+					e.printStackTrace();
+				}
 
 			}
+
 		});
 
 		DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -81,23 +105,53 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		initRecyclerView();
 
 		new MyTask().execute(getFutureDayWeatherQuery("53.6667", "23.8333", "today"),
-				getFutureDayWeatherQuery("23.6667", "13.8333","today"),
+				getFutureDayWeatherQuery("23.6667", "13.8333", "today"),
 				getFutureDayWeatherQuery("77.4445", "-35.6835", "today"),
-				getFutureDayWeatherQuery("63.6667", "123.8333","today"));
+				getFutureDayWeatherQuery("63.6667", "123.8333", "today"));
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode == REQUEST_SELECT_PLACE) {
+			if (resultCode == RESULT_OK) {
+				Place place = PlaceAutocomplete.getPlace(this, data);
+				new MyTask().execute(getFutureDayWeatherQuery(String.valueOf(place.getLatLng().latitude), String.valueOf(place.getLatLng().longitude), "today"));
+			} else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
+				Status status = PlaceAutocomplete.getStatus(this, data);
+				Log.e(TAG, "onError: Status = " + status.toString());
+				Toast.makeText(this, "Place selection failed: " + status.getStatusMessage(),
+						Toast.LENGTH_SHORT).show();
+			}
+		}
+		super.onActivityResult(requestCode, resultCode, data);
 	}
 
 	private void initRecyclerView() {
 		recyclerView.setLayoutManager(new LinearLayoutManager(this));
 		recyclerView.setAdapter(new WeatherCardAdapter(cardsList, 0));
-		//setItemTouchHelper();
+		setItemTouchHelper();
 	}
 
+	private void setItemTouchHelper() {
+		ItemTouchHelper.SimpleCallback swipeTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+			@Override
+			public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+				return false;
+			}
 
-	private void setList(List<WeatherCard> pList) {
+			@Override
+			public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+				WeatherCardAdapter adapter = (WeatherCardAdapter) recyclerView.getAdapter();
+				adapter.remove(viewHolder.getAdapterPosition());
+			}
+		};
+		ItemTouchHelper itemTouchHelper = new ItemTouchHelper(swipeTouchCallback);
+		itemTouchHelper.attachToRecyclerView(recyclerView);
+	}
 
+	private void addList(List<WeatherCard> pList) {
 		this.cardsList = pList;
 		((WeatherCardAdapter) recyclerView.getAdapter()).addItems(pList);
-
 	}
 
 	private String getFutureDayWeatherQuery(String coorLan, String coorLon, String dt) {
@@ -216,7 +270,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 			try {
 				List<WeatherCard> testL = new ArrayList<WeatherCard>();
 				//testL = httpClient.getResult(args[0], new PastWeatherListPresenter());
-				for (int i = 0; i <args.length ; i++) {
+				for (int i = 0; i < args.length; i++) {
 
 					testL.add((WeatherCard) httpClient.getResult(args[i], new CurrentWeatherCityListPresenter()));
 				}
@@ -241,7 +295,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		@Override
 		protected void onPostExecute(List<WeatherCard> result) {
 			//	super.onPostExecute(result);
-			setList(result);
+			addList(result);
 
 		}
 

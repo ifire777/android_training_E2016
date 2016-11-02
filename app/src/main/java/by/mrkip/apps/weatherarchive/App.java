@@ -1,11 +1,11 @@
 package by.mrkip.apps.weatherarchive;
 
-import android.app.Application;
+import android.support.multidex.MultiDexApplication;
 
 import by.mrkip.apps.weatherarchive.globalObj.AppContextIns;
 import by.mrkip.apps.weatherarchive.imageLoader.SimpleImageLoader;
 
-public class App extends Application {
+public class App extends MultiDexApplication {
 
 	private static SimpleImageLoader simpleImageLoader;
 
