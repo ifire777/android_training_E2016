@@ -18,19 +18,26 @@ import by.mrkip.libs.http.HttpClient;
 
 public class CurrentWeatherCityListPresenter implements HttpClient.ResultConverter<WeatherCard> {
 
-	public static final String KEY_VALUE = "value";
-	private static final String TEMP_C = "temp_C";
-	private static final String WEATHER_DESC = "weatherDesc";
-	private static final String HUMIDITY = "humidity";
-	private static final String WINDSPEED_KMPH = "windspeedKmph";
-	private static final String WEATHER_ICON_URL = "weatherIconUrl";
 
-	private static final String VALUE_DATA = "data";
+	private static final String VALUE_LONGITUDE = "longitude";
+	private static final String VALUE_LATITUDE = "latitude";
+	private static final String NEAREST_AREA = "nearest_area";
+	private static final String AREA_NAME = "areaName";
+	private static final String NOT_FOUND_DEFALT_VALUE = "-";
+	private static final String TIME_ZONE = "time_zone";
+	private static final String WEATHER = "weather";
+	private static final String CURRENT_WEATHER = "current_condition";
+	private static final String DATA = "data";
+	private static final String COUNTRY = "country";
+	private static final String VALUE_KEY_VALUE = "value";
+	private static final String VALUE_LOCALTIME = "localtime";
 	private static final String VALUE_DATE = "date";
 	private static final String VALUE_TIME = "observation_time";
-	private static final String VALUE_WEATHER = "weather";
-	private static final String VALUE_CURRENT_WEATHER = "current_condition";
-	private static final String VALUE_HOURLY = "hourly";
+	private static final String VALUE_TEMP_C = "temp_C";
+	private static final String VALUE_WEATHER_DESC = "weatherDesc";
+	private static final String VALUE_HUMIDITY = "humidity";
+	private static final String VALUE_WINDSPEED_KMPH = "windspeedKmph";
+	private static final String VALUE_WEATHER_ICON_URL = "weatherIconUrl";
 	private final Context context = AppContextIns.get();
 
 
@@ -41,12 +48,22 @@ public class CurrentWeatherCityListPresenter implements HttpClient.ResultConvert
 		JSONObject records = null;
 		try {
 			records = new JSONObject(getJSONString(inputStream))
-					.getJSONObject(VALUE_DATA);
+					.getJSONObject(DATA);
 
 			WeatherCard respObject = new WeatherCard();
 
-			respObject.setDate(records.getJSONArray(VALUE_WEATHER).getJSONObject(0).getString(VALUE_DATE)+" ");
-			res = fillCurrentWeatherFromJson(records.getJSONArray(VALUE_CURRENT_WEATHER).getJSONObject(0), respObject);
+			respObject.setDate(getDateFromJSON(records));
+			respObject.setCity(getCityFromJSON(records));
+			respObject.setTempC(getTempCFromJSON(records) + context.getString(R.string.wc_C));
+			respObject.setWeatherType(getWeatherTypeFromJSON(records));
+			respObject.setHumidity(context.getString(R.string.wc_humidity) + getHumidityFromJSON(records) + context.getString(R.string.wc_persent));
+			respObject.setWindSpeed(context.getString(R.string.wc_wind) + getWindSpeedFromJSON(records) + context.getString(R.string.wc_speed_units));
+			respObject.setLan(getLanCFromJSON(records));
+			respObject.setLon(getLonCFromJSON(records));
+
+			respObject.setImageURL(records.getJSONArray(CURRENT_WEATHER).getJSONObject(0).getJSONArray(VALUE_WEATHER_ICON_URL).getJSONObject(0).getString(VALUE_KEY_VALUE));
+
+			res = respObject;
 
 		} catch (JSONException | IOException e) {
 			e.printStackTrace();
@@ -68,17 +85,77 @@ public class CurrentWeatherCityListPresenter implements HttpClient.ResultConvert
 
 	}
 
-	public WeatherCard fillCurrentWeatherFromJson(JSONObject jsonObj, WeatherCard weatherCard) throws JSONException {
-
-		weatherCard.setDate(weatherCard.getDate().concat(jsonObj.getString(VALUE_TIME)));
-		weatherCard.setTempC(jsonObj.getString(TEMP_C) + context.getString(R.string.wc_C));
-		weatherCard.setWeatherType(jsonObj.getJSONArray(WEATHER_DESC).getJSONObject(0).getString(KEY_VALUE));
-		weatherCard.setHumidity(context.getString(R.string.wc_humidity) + jsonObj.getString(HUMIDITY) + context.getString(R.string.wc_persent));
-		weatherCard.setWindSpeed(context.getString(R.string.wc_wind) + String.valueOf(Math.round((jsonObj.getDouble(WINDSPEED_KMPH) / 3.6) * 10d) / 10d) + context.getString(R.string.wc_speed_units));
-		weatherCard.setImageURL(jsonObj.getJSONArray(WEATHER_ICON_URL).getJSONObject(0).getString(KEY_VALUE));
-
-		return weatherCard;
+	private String getLonCFromJSON(JSONObject pJSONObj) {
+		try {
+			return pJSONObj.getJSONArray(NEAREST_AREA).getJSONObject(0).getString(VALUE_LONGITUDE);
+		} catch (JSONException e) {
+			e.printStackTrace();
+			return NOT_FOUND_DEFALT_VALUE;
+		}
 	}
 
+	private String getLanCFromJSON(JSONObject pJSONObj) {
+		try {
+			return pJSONObj.getJSONArray(NEAREST_AREA).getJSONObject(0).getString(VALUE_LATITUDE);
+		} catch (JSONException e) {
+			e.printStackTrace();
+			return NOT_FOUND_DEFALT_VALUE;
+		}
+	}
 
+	private String getTempCFromJSON(JSONObject pJSONObj) {
+		try {
+			return pJSONObj.getJSONArray(CURRENT_WEATHER).getJSONObject(0).getString(VALUE_TEMP_C);
+		} catch (JSONException e) {
+			e.printStackTrace();
+			return NOT_FOUND_DEFALT_VALUE;
+		}
+	}
+
+	private String getWeatherTypeFromJSON(JSONObject pJSONObj) {
+		try {
+			return pJSONObj.getJSONArray(CURRENT_WEATHER).getJSONObject(0).getJSONArray(VALUE_WEATHER_DESC).getJSONObject(0).getString(VALUE_KEY_VALUE);
+		} catch (JSONException e) {
+			e.printStackTrace();
+			return NOT_FOUND_DEFALT_VALUE;
+		}
+	}
+
+	private String getHumidityFromJSON(JSONObject pJSONObj) {
+		try {
+			return pJSONObj.getJSONArray(CURRENT_WEATHER).getJSONObject(0).getString(VALUE_HUMIDITY);
+		} catch (JSONException e) {
+			e.printStackTrace();
+			return NOT_FOUND_DEFALT_VALUE;
+		}
+	}
+
+	private String getWindSpeedFromJSON(JSONObject pJSONObj) {
+		try {
+			return String.valueOf(Math.round((pJSONObj.getJSONArray(CURRENT_WEATHER).getJSONObject(0).getDouble(VALUE_WINDSPEED_KMPH) / 3.6) * 10d) / 10d);
+		} catch (JSONException e) {
+			e.printStackTrace();
+			return NOT_FOUND_DEFALT_VALUE;
+		}
+	}
+
+	private String getDateFromJSON(JSONObject pJSONObj) {
+		try {
+			return pJSONObj.getJSONArray(TIME_ZONE).getJSONObject(0).getString(VALUE_LOCALTIME);
+		} catch (JSONException e) {
+			e.printStackTrace();
+			return NOT_FOUND_DEFALT_VALUE;
+		}
+	}
+
+	private String getCityFromJSON(JSONObject pJSONObj) {
+		try {
+			return pJSONObj.getJSONArray(NEAREST_AREA).getJSONObject(0).getJSONArray(AREA_NAME).getJSONObject(0).getString(VALUE_KEY_VALUE) + ", " +
+					pJSONObj.getJSONArray(NEAREST_AREA).getJSONObject(0).getJSONArray(COUNTRY).getJSONObject(0).getString(VALUE_KEY_VALUE);
+		} catch (JSONException e) {
+			e.printStackTrace();
+			return NOT_FOUND_DEFALT_VALUE;
+		}
+
+	}
 }

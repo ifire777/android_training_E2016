@@ -3,6 +3,7 @@ package by.mrkip.apps.weatherarchive.imageLoader;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.support.annotation.NonNull;
 import android.support.v4.util.LruCache;
 import android.widget.ImageView;
 
@@ -37,7 +38,7 @@ public class SimpleImageLoaderImpl implements SimpleImageLoader {
 	}
 
 	@Override
-	public void drawBitmap(final ImageView imageView, final String imageUrl) {
+	public void drawBitmap(final ImageView imageView,@NonNull final String imageUrl) {
 		synchronized (lock) {
 			final Bitmap bitmap = lruCache.get(imageUrl);
 			if (bitmap != null) {

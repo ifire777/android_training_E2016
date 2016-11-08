@@ -50,8 +50,10 @@ import static by.mrkip.apps.weatherarchive.globalObj.Api.QUERY_PARAM_DATE;
 import static by.mrkip.apps.weatherarchive.globalObj.Api.QUERY_PARAM_FORMAT;
 import static by.mrkip.apps.weatherarchive.globalObj.Api.QUERY_PARAM_INCLUDELOCATION;
 import static by.mrkip.apps.weatherarchive.globalObj.Api.QUERY_PARAM_KEY;
+import static by.mrkip.apps.weatherarchive.globalObj.Api.QUERY_PARAM_LANG;
 import static by.mrkip.apps.weatherarchive.globalObj.Api.QUERY_PARAM_NUMOFDAY;
 import static by.mrkip.apps.weatherarchive.globalObj.Api.QUERY_PARAM_Q;
+import static by.mrkip.apps.weatherarchive.globalObj.Api.QUERY_PARAM_SHOWLOCALTIME;
 import static by.mrkip.apps.weatherarchive.globalObj.Api.QUERY_PARAM_TP;
 import static by.mrkip.apps.weatherarchive.globalObj.Api.WEATHER_API_KEY;
 
@@ -60,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 	private static final LatLngBounds BOUNDS_MOUNTAIN_VIEW = new LatLngBounds(new LatLng(37.398160, -122.180831), new LatLng(37.430610, -121.972090));
 	private static final int REQUEST_SELECT_PLACE = 1000;
+
 
 	private List<WeatherCard> cardsList;
 	private RecyclerView recyclerView;
@@ -76,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		fab.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				try {
+				try { //TODO: To easy and does't work without google play services! need to be rewrite
 					Intent intent = new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_OVERLAY)
 							.setBoundsBias(BOUNDS_MOUNTAIN_VIEW)
 							.setFilter(new AutocompleteFilter.Builder().setTypeFilter(AutocompleteFilter.TYPE_FILTER_CITIES).build())
@@ -129,6 +132,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	private void initRecyclerView() {
 		recyclerView.setLayoutManager(new LinearLayoutManager(this));
 		recyclerView.setAdapter(new WeatherCardAdapter(cardsList, 0));
+
 		setItemTouchHelper();
 	}
 
@@ -149,11 +153,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		itemTouchHelper.attachToRecyclerView(recyclerView);
 	}
 
-	private void addList(List<WeatherCard> pList) {
-		this.cardsList = pList;
-		((WeatherCardAdapter) recyclerView.getAdapter()).addItems(pList);
-	}
-
 	private String getFutureDayWeatherQuery(String coorLan, String coorLon, String dt) {
 		return new GetQueryBuilder(FUTURE_WEATHER_URL)
 				.addParam(QUERY_PARAM_Q, coorLan + "," + coorLon)
@@ -161,6 +160,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 				.addParam(QUERY_PARAM_DATE, dt)
 				.addParam(QUERY_PARAM_NUMOFDAY, "1")
 				.addParam(QUERY_PARAM_INCLUDELOCATION, "yes")
+				.addParam(QUERY_PARAM_SHOWLOCALTIME, "yes")
+				.addParam(QUERY_PARAM_LANG, "ru")
 				.addParam(QUERY_PARAM_KEY, WEATHER_API_KEY)
 				.addParam(QUERY_PARAM_TP, "12")
 				.addParam(QUERY_PARAM_CURRENT_WEATHER, "yes")
@@ -295,8 +296,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		@Override
 		protected void onPostExecute(List<WeatherCard> result) {
 			//	super.onPostExecute(result);
-			addList(result);
-
+			if (result != null) {
+				cardsList = result;
+				((WeatherCardAdapter) recyclerView.getAdapter()).addItems(result);
+			}
 		}
 
 	}

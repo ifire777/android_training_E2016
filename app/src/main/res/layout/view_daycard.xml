@@ -10,24 +10,33 @@
 
     <ImageView
         android:id="@+id/dwc_weatherimage"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:background="@color/colorPrimary"
         android:textSize="30sp"/>
 
     <TextView
-        android:id="@+id/dwc_todaydate"
-        android:layout_width="110dp"
+        android:id="@+id/dwc_city"
+        android:layout_width="190dp"
         android:layout_height="10dp"
-        android:layout_marginLeft="80dp"
+        android:layout_marginLeft="0dp"
         android:gravity="center"
         android:background="@color/colorAccent"
         android:textSize="8sp"/>
     <TextView
-        android:id="@+id/dwc_temperature"
+        android:id="@+id/dwc_todaydate"
         android:layout_width="110dp"
+        android:layout_height="10dp"
+        android:layout_marginLeft="190dp"
+        android:gravity="center"
+        android:background="@color/cardview_light_background"
+        android:textSize="8sp"/>
+    <TextView
+        android:id="@+id/dwc_temperature"
+        android:layout_width="120dp"
         android:layout_height="70dp"
-        android:layout_marginLeft="80dp"
+        android:layout_marginLeft="70dp"
         android:layout_marginTop="10dp"
         android:gravity="center"
         android:background="@color/in_color_green"

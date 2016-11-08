@@ -18,9 +18,12 @@ import android.view.MenuItem;
 import android.view.View;
 
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import by.mrkip.apps.weatherarchive.adapters.WeatherCardAdapter;
+import by.mrkip.apps.weatherarchive.dateHelper.MyDateFun;
 import by.mrkip.apps.weatherarchive.location.LocationActivity;
 import by.mrkip.apps.weatherarchive.model.WeatherCard;
 import by.mrkip.apps.weatherarchive.presenters.PastWeatherListPresenter;
@@ -40,7 +43,7 @@ import static by.mrkip.apps.weatherarchive.globalObj.Api.WEATHER_API_KEY;
 public class SpecificCityActivity extends AppCompatActivity {
 	private List<WeatherCard> cardsList;
 	private RecyclerView recyclerView;
-
+	private MyDateFun dtFun = new MyDateFun();
 
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,7 +63,15 @@ public class SpecificCityActivity extends AppCompatActivity {
 		recyclerView = (RecyclerView) findViewById(R.id.sca_view_recycle);
 		initRecyclerView();
 
-		new MyTask().execute(getPastDayWeatherQuery("53.6667", "23.8333", "2016-09-23", "2016-10-23"));
+		Intent intent = getIntent();
+
+		Date dt = new Date();
+
+		String endDt = dtFun.dateDefToQueryParam(dt, Calendar.DAY_OF_MONTH, -1);
+		String startDt = dtFun.dateDefToQueryParam(dt, Calendar.DAY_OF_MONTH, -30);
+		String city_lan = intent.getStringExtra("city_lan");
+		String city_lon = intent.getStringExtra("city_lon");
+		new MyTask().execute(getPastDayWeatherQuery(city_lan, city_lon, startDt, endDt));
 
 	}
 
@@ -69,17 +80,6 @@ public class SpecificCityActivity extends AppCompatActivity {
 		recyclerView.setLayoutManager(new LinearLayoutManager(this));
 		recyclerView.setAdapter(new WeatherCardAdapter(cardsList, 0));
 
-	}
-
-
-	private void setList(List<WeatherCard> pList) {
-		if (pList != null) {
-			this.cardsList = pList;
-			((WeatherCardAdapter) recyclerView.getAdapter()).addItems(pList);
-		} else {
-			Snackbar.make(this.recyclerView,getString(R.string.sca_nodata), Snackbar.LENGTH_LONG)
-					.setAction("Action", null).show();
-		}
 	}
 
 	private String getPastDayWeatherQuery(String coorLan, String coorLon, String startDt, String endDt) {
@@ -163,7 +163,7 @@ public class SpecificCityActivity extends AppCompatActivity {
 			HttpClient httpClient = new HttpClient();
 			try {
 				List<WeatherCard> testL;
-				testL=httpClient.getResult(args[0], new PastWeatherListPresenter());
+				testL = httpClient.getResult(args[0], new PastWeatherListPresenter());
 				return testL;
 
 			} catch (IOException e) {
@@ -186,9 +186,13 @@ public class SpecificCityActivity extends AppCompatActivity {
 
 		@Override
 		protected void onPostExecute(List<WeatherCard> result) {
-			//	super.onPostExecute(result);
-			setList(result);
-
+			if (result != null) {
+				cardsList = result;
+				((WeatherCardAdapter) recyclerView.getAdapter()).addItems(result);
+			} else {
+				Snackbar.make(recyclerView, getString(R.string.sca_nodata), Snackbar.LENGTH_LONG)
+						.setAction("Action", null).show();
+			}
 		}
 
 	}

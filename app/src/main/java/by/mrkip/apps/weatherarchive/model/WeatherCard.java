@@ -3,12 +3,16 @@ package by.mrkip.apps.weatherarchive.model;
 
 public class WeatherCard {
 
+
+	private String city;
 	private String weatherType;
 	private String tempC;
 	private String humidity;
 	private String windSpeed;
 	private String date;
 	private String imageURL;
+	private String lan;
+	private String lon;
 
 	public WeatherCard() {
 	}
@@ -51,7 +55,7 @@ public class WeatherCard {
 	}
 
 	public void setHumidity(String humidity) {
-		this.humidity =  humidity;
+		this.humidity = humidity;
 	}
 
 	public String getWindSpeed() {
@@ -59,7 +63,7 @@ public class WeatherCard {
 	}
 
 	public void setWindSpeed(String windSpeed) {
-		this.windSpeed =  windSpeed ;
+		this.windSpeed = windSpeed;
 	}
 
 	public String getImageURL() {
@@ -70,5 +74,28 @@ public class WeatherCard {
 		this.imageURL = imageURL;
 	}
 
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getLan() {
+		return lan;
+	}
+
+	public void setLan(String lan) {
+		this.lan = lan;
+	}
+
+	public String getLon() {
+		return lon;
+	}
+
+	public void setLon(String lon) {
+		this.lon = lon;
+	}
 
 }

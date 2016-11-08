@@ -21,6 +21,8 @@ public class Api {
 	public static final String QUERY_PARAM_NUMOFDAY = "num_of_days";
 	public static final String QUERY_PARAM_CURRENT_WEATHER = "cc";
 	public static final String QUERY_PARAM_CLIMATE = "mca";
+	public static final String QUERY_PARAM_SHOWLOCALTIME = "showlocaltime";
+	public static final String QUERY_PARAM_LANG = "lang";
 
 
 }
