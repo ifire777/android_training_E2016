@@ -16,28 +16,25 @@ import by.mrkip.apps.weatherarchive.globalObj.AppContextIns;
 import by.mrkip.apps.weatherarchive.model.WeatherCard;
 import by.mrkip.libs.http.HttpClient;
 
+import static by.mrkip.apps.weatherarchive.globalObj.JsonKeys.AREA_NAME;
+import static by.mrkip.apps.weatherarchive.globalObj.JsonKeys.COUNTRY;
+import static by.mrkip.apps.weatherarchive.globalObj.JsonKeys.CURRENT_WEATHER;
+import static by.mrkip.apps.weatherarchive.globalObj.JsonKeys.DATA;
+import static by.mrkip.apps.weatherarchive.globalObj.JsonKeys.NEAREST_AREA;
+import static by.mrkip.apps.weatherarchive.globalObj.JsonKeys.TIME_ZONE;
+import static by.mrkip.apps.weatherarchive.globalObj.JsonKeys.VALUE_HUMIDITY;
+import static by.mrkip.apps.weatherarchive.globalObj.JsonKeys.VALUE_KEY_VALUE;
+import static by.mrkip.apps.weatherarchive.globalObj.JsonKeys.VALUE_LATITUDE;
+import static by.mrkip.apps.weatherarchive.globalObj.JsonKeys.VALUE_LOCALTIME;
+import static by.mrkip.apps.weatherarchive.globalObj.JsonKeys.VALUE_LONGITUDE;
+import static by.mrkip.apps.weatherarchive.globalObj.JsonKeys.VALUE_TEMP_C;
+import static by.mrkip.apps.weatherarchive.globalObj.JsonKeys.VALUE_WEATHER_DESC;
+import static by.mrkip.apps.weatherarchive.globalObj.JsonKeys.VALUE_WEATHER_ICON_URL;
+import static by.mrkip.apps.weatherarchive.globalObj.JsonKeys.VALUE_WINDSPEED_KMPH;
+
 public class CurrentWeatherCityListPresenter implements HttpClient.ResultConverter<WeatherCard> {
 
-
-	private static final String VALUE_LONGITUDE = "longitude";
-	private static final String VALUE_LATITUDE = "latitude";
-	private static final String NEAREST_AREA = "nearest_area";
-	private static final String AREA_NAME = "areaName";
-	private static final String NOT_FOUND_DEFALT_VALUE = "-";
-	private static final String TIME_ZONE = "time_zone";
-	private static final String WEATHER = "weather";
-	private static final String CURRENT_WEATHER = "current_condition";
-	private static final String DATA = "data";
-	private static final String COUNTRY = "country";
-	private static final String VALUE_KEY_VALUE = "value";
-	private static final String VALUE_LOCALTIME = "localtime";
-	private static final String VALUE_DATE = "date";
-	private static final String VALUE_TIME = "observation_time";
-	private static final String VALUE_TEMP_C = "temp_C";
-	private static final String VALUE_WEATHER_DESC = "weatherDesc";
-	private static final String VALUE_HUMIDITY = "humidity";
-	private static final String VALUE_WINDSPEED_KMPH = "windspeedKmph";
-	private static final String VALUE_WEATHER_ICON_URL = "weatherIconUrl";
+	public static final String NOT_FOUND_DEFALT_VALUE = "-";
 	private final Context context = AppContextIns.get();
 
 

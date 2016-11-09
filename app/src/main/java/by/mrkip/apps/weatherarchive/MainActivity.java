@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		recyclerView = (RecyclerView) findViewById(R.id.rsa_view_recycle);
 
 		initRecyclerView();
-
+        //TODO: start city list get from sqlite or preference
 		new MyTask().execute(getFutureDayWeatherQuery("53.6667", "23.8333", "today"),
 				getFutureDayWeatherQuery("23.6667", "13.8333", "today"),
 				getFutureDayWeatherQuery("77.4445", "-35.6835", "today"),
