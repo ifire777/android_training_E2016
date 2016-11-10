@@ -40,4 +40,6 @@ public class JsonKeys {
 	public static final String VALUE_DESCRIPTION = "description";
 	public static final String VALUE_ERROR_MESSAGE = "error_message";
 
+	public static final String VALUE_PLACE_ID = "place_id";
+
 }

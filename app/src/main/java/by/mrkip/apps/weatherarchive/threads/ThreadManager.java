@@ -22,7 +22,6 @@ public class ThreadManager {
 	public <Params, Progress, Result> void execute(final Operation<Params, Progress, Result> operation, final Params param, final OnResultCallback<Result, Progress> onResultCallback) {
 		final Handler handler = new Handler();
 		executorService.execute(new Runnable() {
-
 			@Override
 			public void run() {
 				try {

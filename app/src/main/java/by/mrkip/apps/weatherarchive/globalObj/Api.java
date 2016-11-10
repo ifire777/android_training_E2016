@@ -8,6 +8,7 @@ public class Api {
 	public static final String FUTURE_WEATHER_URL = "http://api.worldweatheronline.com/free/v2/weather.ashx";
 	public static final String PLACES_API_BASE_URI = "https://maps.googleapis.com/maps/api/place";
 	public static final String PLACES_API_TYPE_AUTOCOMPLETE = "/autocomplete";
+	public static final String PLACE_API_TYPE_DETAILS = "/details";
 	public static final String PLACES_API_OUT_JSON = "/json";
 
 
@@ -32,6 +33,9 @@ public class Api {
 	public static final String QUERY_PARAM_KEY = "key";
 	public static final String QUERY_PARAM_TYPES = "types";
 	public static final String QUERY_PARAM_INPUT = "input";
+
+
+	public static final String QUERY_PARAM_PLACEID = "placeid";
 
 
 }

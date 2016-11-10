@@ -14,21 +14,24 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import by.mrkip.apps.weatherarchive.model.PlaceData;
 import by.mrkip.libs.http.HttpClient;
 
 import static by.mrkip.apps.weatherarchive.globalObj.JsonKeys.PREDICTIONS;
 import static by.mrkip.apps.weatherarchive.globalObj.JsonKeys.VALUE_DESCRIPTION;
 import static by.mrkip.apps.weatherarchive.globalObj.JsonKeys.VALUE_ERROR_MESSAGE;
+import static by.mrkip.apps.weatherarchive.globalObj.JsonKeys.VALUE_PLACE_ID;
 import static by.mrkip.apps.weatherarchive.globalObj.JsonKeys.VALUE_STATUS;
 
-public class CitySelectionPresenter implements HttpClient.ResultConverter<List<String>> {
+public class CitySelectionPresenter implements HttpClient.ResultConverter<List<PlaceData>> {
 
 	public static final String OK = "OK";
 
 
+
 	@Override
-	public List<String> convert(InputStream inputStream) {
-		ArrayList<String> resultList = null;
+	public List<PlaceData> convert(InputStream inputStream) {
+		ArrayList<PlaceData> resultList = null;
 
 
 		try {
@@ -38,7 +41,8 @@ public class CitySelectionPresenter implements HttpClient.ResultConverter<List<S
 
 				resultList = new ArrayList<>(predsJsonArray.length());
 				for (int i = 0; i < predsJsonArray.length(); i++) {
-					resultList.add(predsJsonArray.getJSONObject(i).getString(VALUE_DESCRIPTION));
+
+					resultList.add(new PlaceData(predsJsonArray.getJSONObject(i).getString(VALUE_DESCRIPTION),predsJsonArray.getJSONObject(i).getString(VALUE_PLACE_ID)));//TODO:constructor-builder of PlaceData object
 				}
 			}else{
 

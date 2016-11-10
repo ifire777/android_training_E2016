@@ -20,16 +20,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
-
-import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
-import com.google.android.gms.common.GooglePlayServicesRepairableException;
-import com.google.android.gms.common.api.Status;
-import com.google.android.gms.location.places.AutocompleteFilter;
-import com.google.android.gms.location.places.Place;
-import com.google.android.gms.location.places.ui.PlaceAutocomplete;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.LatLngBounds;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -60,7 +50,7 @@ import static by.mrkip.apps.weatherarchive.globalObj.Api.WEATHER_API_KEY;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
 
-	private static final LatLngBounds BOUNDS_MOUNTAIN_VIEW = new LatLngBounds(new LatLng(37.398160, -122.180831), new LatLng(37.430610, -121.972090));
+	/*private static final LatLngBounds BOUNDS_MOUNTAIN_VIEW = new LatLngBounds(new LatLng(37.398160, -122.180831), new LatLng(37.430610, -121.972090));*/
 	private static final int REQUEST_SELECT_PLACE = 1000;
 
 
@@ -79,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		fab.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				try { //TODO: To easy and does't work without google play services! need to be rewrite
+				/*try { //TODO: Too easy and does't work without google play services! need to be rewrite
 					Intent intent = new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_OVERLAY)
 							.setBoundsBias(BOUNDS_MOUNTAIN_VIEW)
 							.setFilter(new AutocompleteFilter.Builder().setTypeFilter(AutocompleteFilter.TYPE_FILTER_CITIES).build())
@@ -88,7 +78,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 				} catch (GooglePlayServicesRepairableException |
 						GooglePlayServicesNotAvailableException e) {
 					e.printStackTrace();
+				}*/
+
+				try {
+					Intent intent = new Intent(MainActivity.this, CitySelectionActivity.class);
+					startActivityForResult(intent, REQUEST_SELECT_PLACE);
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
+
 
 			}
 
@@ -116,15 +114,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == REQUEST_SELECT_PLACE) {
-			if (resultCode == RESULT_OK) {
+			/*if (resultCode == RESULT_OK) {
+
+
 				Place place = PlaceAutocomplete.getPlace(this, data);
+
+
+
+
 				new MyTask().execute(getFutureDayWeatherQuery(String.valueOf(place.getLatLng().latitude), String.valueOf(place.getLatLng().longitude), "today"));
+
 			} else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
 				Status status = PlaceAutocomplete.getStatus(this, data);
 				Log.e(TAG, "onError: Status = " + status.toString());
 				Toast.makeText(this, "Place selection failed: " + status.getStatusMessage(),
 						Toast.LENGTH_SHORT).show();
-			}
+			}*/
 		}
 		super.onActivityResult(requestCode, resultCode, data);
 	}

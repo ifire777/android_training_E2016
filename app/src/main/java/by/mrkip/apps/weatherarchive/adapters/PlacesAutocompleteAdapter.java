@@ -13,6 +13,7 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
+import by.mrkip.apps.weatherarchive.model.PlaceData;
 import by.mrkip.apps.weatherarchive.presenters.CitySelectionPresenter;
 import by.mrkip.libs.http.HttpClient;
 import by.mrkip.libs.http.httpHelper.GetQueryBuilder;
@@ -25,12 +26,12 @@ import static by.mrkip.apps.weatherarchive.globalObj.Api.QUERY_PARAM_INPUT;
 import static by.mrkip.apps.weatherarchive.globalObj.Api.QUERY_PARAM_KEY;
 import static by.mrkip.apps.weatherarchive.globalObj.Api.QUERY_PARAM_TYPES;
 
-public class GooglePlacesAutocompleteAdapter extends ArrayAdapter implements Filterable {
+public class PlacesAutocompleteAdapter extends ArrayAdapter<PlaceData> implements Filterable {
 
 
-	private ArrayList<String> resultList;
+	private ArrayList<PlaceData> resultList;
 
-	public GooglePlacesAutocompleteAdapter(Context context, int textViewResourceId) {
+	public PlacesAutocompleteAdapter(Context context, int textViewResourceId) {
 		super(context, textViewResourceId);
 	}
 
@@ -40,7 +41,7 @@ public class GooglePlacesAutocompleteAdapter extends ArrayAdapter implements Fil
 	}
 
 	@Override
-	public String getItem(int index) {
+	public PlaceData getItem(int index) {
 		return resultList.get(index);
 	}
 
@@ -52,7 +53,7 @@ public class GooglePlacesAutocompleteAdapter extends ArrayAdapter implements Fil
 				FilterResults filterResults = new FilterResults();
 				if (constraint != null) {
 					try {
-						resultList = reqCityList(getCityAutocompleteQuery(constraint.toString()));
+						resultList = requestCityList(getCityAutocompleteQuery(constraint.toString()));
 					} catch (UnsupportedEncodingException e) {
 						e.printStackTrace();
 					}
@@ -64,12 +65,12 @@ public class GooglePlacesAutocompleteAdapter extends ArrayAdapter implements Fil
 			}
 
 			@Nullable
-			private ArrayList<String> reqCityList(String urlRequest) {
+			private ArrayList<PlaceData> requestCityList(String urlRequest) {
 				HttpClient httpClient = new HttpClient();
 				try {
-					List<String> testL;
+					List<PlaceData> testL;
 					testL = httpClient.getResult(urlRequest, new CitySelectionPresenter());
-					return (ArrayList<String>) testL;
+					return (ArrayList<PlaceData>) testL;
 
 				} catch (IOException e) {
 					Log.e(this.toString(), this.toString() + "|IOException :", e);
@@ -101,6 +102,7 @@ public class GooglePlacesAutocompleteAdapter extends ArrayAdapter implements Fil
 		};
 		return filter;
 	}
-}
 
+
+}
 
