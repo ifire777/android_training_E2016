@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 				/*try { //TODO: Too easy and does't work without google play services! need to be rewrite
 					Intent intent = new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_OVERLAY)
 							.setBoundsBias(BOUNDS_MOUNTAIN_VIEW)
-							.setFilter(new AutocompleteFilter.Builder().setTypeFilter(AutocompleteFilter.TYPE_FILTER_CITIES).build())
+							.setFilter(new AutocompleteFilter.Builder().setTypeFilter(AutocompleteFilter.TYPE_FILTER_ CITIES).build())
 							.build(MainActivity.this);
 					startActivityForResult(intent, REQUEST_SELECT_PLACE);
 				} catch (GooglePlayServicesRepairableException |
@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		recyclerView = (RecyclerView) findViewById(R.id.rsa_view_recycle);
 
 		initRecyclerView();
-        //TODO: start city list get from sqlite or preference
+		//TODO: start city list get from sqlite or preference
 		new MyTask().execute(getFutureDayWeatherQuery("53.6667", "23.8333", "today"),
 				getFutureDayWeatherQuery("23.6667", "13.8333", "today"),
 				getFutureDayWeatherQuery("77.4445", "-35.6835", "today"),
@@ -114,22 +114,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == REQUEST_SELECT_PLACE) {
-			/*if (resultCode == RESULT_OK) {
+			if (resultCode == RESULT_OK) {
 
+				new MyTask().execute(getFutureDayWeatherQuery(data.getStringExtra("cityLan"),data.getStringExtra("cityLon"), "today"));
 
-				Place place = PlaceAutocomplete.getPlace(this, data);
+			} else {
+				Snackbar.make(new View(this), "Place selection failed: ", Snackbar.LENGTH_LONG)
+						.setAction("Action", null).show();
 
-
-
-
-				new MyTask().execute(getFutureDayWeatherQuery(String.valueOf(place.getLatLng().latitude), String.valueOf(place.getLatLng().longitude), "today"));
-
-			} else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
-				Status status = PlaceAutocomplete.getStatus(this, data);
-				Log.e(TAG, "onError: Status = " + status.toString());
-				Toast.makeText(this, "Place selection failed: " + status.getStatusMessage(),
-						Toast.LENGTH_SHORT).show();
-			}*/
+			}
 		}
 		super.onActivityResult(requestCode, resultCode, data);
 	}

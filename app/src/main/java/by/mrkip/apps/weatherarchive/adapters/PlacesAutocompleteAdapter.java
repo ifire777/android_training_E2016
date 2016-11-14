@@ -33,6 +33,8 @@ public class PlacesAutocompleteAdapter extends ArrayAdapter<PlaceData> implement
 
 	public PlacesAutocompleteAdapter(Context context, int textViewResourceId) {
 		super(context, textViewResourceId);
+
+
 	}
 
 	@Override
@@ -42,8 +44,10 @@ public class PlacesAutocompleteAdapter extends ArrayAdapter<PlaceData> implement
 
 	@Override
 	public PlaceData getItem(int index) {
-		return resultList.get(index);
+		return  resultList.get(index);
 	}
+
+
 
 	@Override
 	public Filter getFilter() {
@@ -58,8 +62,13 @@ public class PlacesAutocompleteAdapter extends ArrayAdapter<PlaceData> implement
 						e.printStackTrace();
 					}
 
-					filterResults.values = resultList;
-					filterResults.count = resultList.size();
+					List<String> cityNames = new ArrayList<>();
+					for (int i = 0; i < resultList.size() - 1; i++) {
+						cityNames.add(resultList.get(i).getPlaceName());
+					}
+
+					filterResults.values = cityNames;
+					filterResults.count = cityNames.size();
 				}
 				return filterResults;
 			}

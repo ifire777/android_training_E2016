@@ -1,19 +1,22 @@
 package by.mrkip.apps.weatherarchive.model;
 
 
-
-public class PlaceData {
+public class PlaceData extends Object {
 
 	private String placeName;
 	private String placeId;
 	private String lan;
 	private String lon;
 
+	public PlaceData() {
+	}
 
 	public PlaceData(String placeName, String placeId) {
 		this.placeName = placeName;
 		this.placeId = placeId;
 	}
+
+
 
 	public String getLan() {
 		return lan;
@@ -45,5 +48,10 @@ public class PlaceData {
 
 	public void setPlaceId(String placeId) {
 		this.placeId = placeId;
+	}
+
+	@Override
+	public String toString() {
+		return this.getPlaceName();
 	}
 }

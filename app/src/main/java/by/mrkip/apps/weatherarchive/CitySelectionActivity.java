@@ -1,17 +1,22 @@
 package by.mrkip.apps.weatherarchive;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
-import android.widget.Toast;
 
-import java.io.UnsupportedEncodingException;
+import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import by.mrkip.apps.weatherarchive.adapters.PlacesAutocompleteAdapter;
+import by.mrkip.apps.weatherarchive.model.PlaceData;
+import by.mrkip.apps.weatherarchive.presenters.CityDataPresenter;
+import by.mrkip.libs.http.HttpClient;
 import by.mrkip.libs.http.httpHelper.GetQueryBuilder;
 
 import static by.mrkip.apps.weatherarchive.globalObj.Api.PLACES_API_BASE_URI;
@@ -41,18 +46,16 @@ public class CitySelectionActivity extends AppCompatActivity implements AdapterV
 
 	@Override
 	public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-		String str = (String) adapterView.getItemAtPosition(position);
-		Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
+		getSelectedCityData(getCityDataQuery(((PlaceData) (adapterView.getItemAtPosition(position))).getPlaceId()));
 	}
 
-	private void getSelectedCityData(String urlRequest) {
+	private void getSelectedCityData(final String urlRequest) {
 		executorService.execute(new Runnable() {
 			@Override
 			public void run() {
-				/*HttpClient httpClient = new HttpClient();
+				HttpClient httpClient = new HttpClient();
 				try {
-				//	String = httpClient.getResult(urlRequest, new CitySelectionPresenter());
-				//	return (ArrayList<String>) testL;
+ 					returnSelectedCity(httpClient.getResult(urlRequest, new CityDataPresenter()));
 
 				} catch (IOException e) {
 					Log.e(this.toString(), this.toString() + "|IOException :", e);
@@ -62,17 +65,26 @@ public class CitySelectionActivity extends AppCompatActivity implements AdapterV
 					Log.e(this.toString(), this.toString() + "|Exception:", e);
 
 
-				}*/
+				}
 
 			}
 		});
 	}
 
-	private String getCityDataQuery(String placeID) throws UnsupportedEncodingException {
+	private String getCityDataQuery(String placeID) {
 		return new GetQueryBuilder(PLACES_API_BASE_URI + PLACE_API_TYPE_DETAILS + PLACES_API_OUT_JSON)
 				.addParam(QUERY_PARAM_KEY, PLACE_API_KEY)
 				.addParam(QUERY_PARAM_PLACEID, placeID)
 				.getUrl();
+	}
+
+	private void returnSelectedCity(PlaceData pCity) {
+
+		Intent resultIntent = new Intent();
+		resultIntent.putExtra("cityLon", pCity.getLon());
+		resultIntent.putExtra("cityLan", pCity.getLan());
+		setResult(Activity.RESULT_OK, resultIntent);
+		finish();
 	}
 
 }
